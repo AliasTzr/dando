@@ -1,0 +1,205 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:projet0_strat/Controllers/controller.dart';
+
+
+// ignore: must_be_immutable
+class CalculatorButtons extends StatefulWidget {
+  int countMatch;
+  final List<String> scoresTeamA, scoresTeamB;
+  final Function(List<String>) refreshScoresTeamA;
+  final Function(List<String>) refreshScoresTeamB;
+  final VoidCallback manageButton;
+  final Function(int) refreshCountMatch;
+  CalculatorButtons({super.key, required this.countMatch, required this.scoresTeamB, required this.scoresTeamA, required this.refreshScoresTeamA, required this.refreshScoresTeamB, required this.refreshCountMatch, required this.manageButton});
+
+  @override
+  State<CalculatorButtons> createState() => _CalculatorButtonsState();
+}
+
+class _CalculatorButtonsState extends State<CalculatorButtons> {
+  final Controller controller = Get.put(Controller());
+  String scoreA = '', scoreB = '', scoresTeamBForDatabase = '', scoresTeamAForDatabase = '';
+  bool caseASelected = true, caseBSelected = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          width: controller.width * 3 / 4,
+          height: controller.height / 2.95,
+          padding: EdgeInsets.symmetric(horizontal: controller.width / 33),
+          child: Column(
+            children: [
+              SizedBox(
+                width: controller.width,
+                height: controller.height / 12,
+                child: Row(
+                  children: [
+                    InkWell(
+                      onTap: (){
+                        setState(() {
+                          caseASelected = true;
+                          caseBSelected = false;
+                        });
+                      },
+                      child: textFieldSelector(score: scoreA, placeHolderValue: "Score A", caseSelected: caseASelected),
+                    ),
+                    const SizedBox(width: 8,),
+                    InkWell(
+                      onTap: (){
+                        setState(() {
+                          caseASelected = false;
+                          caseBSelected = true;
+                        });
+                      },
+                      child: textFieldSelector(score: scoreB, placeHolderValue: "Score B", caseSelected: caseBSelected),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                children: [
+                  calculatorButton(textValue: "1", numberSide: true, onButtonPressed: widget.manageButton),
+                  SizedBox(width: controller.width / 25,),
+                  calculatorButton(textValue: "2", numberSide: true, onButtonPressed: widget.manageButton),
+                  SizedBox(width: controller.width / 25,),
+                  calculatorButton(textValue: "3", numberSide: true, onButtonPressed: widget.manageButton),
+                ],
+              ),
+              SizedBox(height: controller.height / 50,),
+              Row(
+                children: [
+                  calculatorButton(textValue: "4", numberSide: true, onButtonPressed: widget.manageButton),
+                  SizedBox(width: controller.width / 25,),
+                  calculatorButton(textValue: "5", numberSide: true, onButtonPressed: widget.manageButton),
+                  SizedBox(width: controller.width / 25,),
+                  calculatorButton(textValue: "6", numberSide: true, onButtonPressed: widget.manageButton),
+                ],
+              ),
+              SizedBox(height: controller.height / 50,),
+              Row(
+                children: [
+                  calculatorButton(textValue: "7", numberSide: true, onButtonPressed: widget.manageButton),
+                  SizedBox(width: controller.width / 25,),
+                  calculatorButton(textValue: "8", numberSide: true, onButtonPressed: widget.manageButton),
+                  SizedBox(width: controller.width / 25,),
+                  calculatorButton(textValue: "9", numberSide: true, onButtonPressed: widget.manageButton),
+                ],
+              ),
+              SizedBox(height: controller.height / 50,),
+              Row(
+                children: [
+                  calculatorButton(textValue: "0", numberSide: true, onButtonPressed: widget.manageButton),
+                  SizedBox(width: controller.width / 25,),
+                  calculatorButton(textValue: "Match suivant", numberSide: true, onButtonPressed: widget.manageButton),
+                ],
+              ),
+            ],
+          ),
+        ),
+        Container(
+          width: controller.width / 4,
+          height: controller.height / 2.95,
+          padding: EdgeInsets.only(top: controller.width / 24, right: controller.width / 33),
+          child: Column(
+            children: [
+              calculatorButton(textValue: "Supp.", numberSide: false, onButtonPressed: widget.manageButton),
+              SizedBox(height: controller.height / 52,),
+              calculatorButton(textValue: "Vider", numberSide: false, onButtonPressed: widget.manageButton),
+              SizedBox(height: controller.height / 52,),
+              calculatorButton(textValue: "Sauv.", numberSide: false, onButtonPressed: widget.manageButton),
+              SizedBox(height: controller.height / 52,),
+              SizedBox(
+                width: controller.width / 4,
+                height: controller.height * (1 / 11 + 1 / 50),
+                child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(controller.tealColor),
+                    ),
+                    onPressed: (){
+                      setState(() {
+                        if(widget.countMatch != 0){
+                          widget.refreshScoresTeamA(widget.scoresTeamA);
+                          widget.refreshScoresTeamB(widget.scoresTeamB);
+                          widget.refreshCountMatch(widget.countMatch);
+                          scoreA  = widget.scoresTeamA[widget.countMatch - 1];
+                          scoreB =  widget.scoresTeamB[widget.countMatch - 1];
+                          widget.countMatch--;
+                        }
+                      });
+
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            "Match",
+                            style: GoogleFonts.acme(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            "Préc.",
+                            style: GoogleFonts.acme(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+  Widget calculatorButton({required String textValue, bool? numberSide, required VoidCallback onButtonPressed}) => SizedBox(
+    width: numberSide! ? textValue == "Match suivant" ? (controller.width * (1 / 2.475 + 1/25) ) : controller.width / 4.95 : controller.width / 4,
+    height: controller.height / 22,
+    child: TextButton(
+        style: ButtonStyle(
+            elevation: MaterialStateProperty.all(numberSide && textValue != "Match suivant"  ? 0 : 3),
+            backgroundColor: MaterialStateProperty.all(textValue == "Match suivant" ? Colors.teal : Colors.white)
+        ),
+        onPressed: onButtonPressed,
+        child: Text(
+          textValue,
+          style: GoogleFonts.acme(
+              fontSize: numberSide && textValue != "Match suivant" ? 20: 14, color: textValue == "Match suivant" ? Colors.white : Colors.teal
+          ),
+        )
+    ),
+  );
+
+  Widget textFieldSelector({required String score, required String placeHolderValue, required bool caseSelected}) => AnimatedContainer(
+    duration: const Duration(seconds: 1),
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+    width: controller.width / 3,
+    height: controller.height / 17,
+    decoration: BoxDecoration(
+      color: caseSelected ? Colors.teal : Colors.black12,
+      borderRadius: BorderRadius.circular(5.0),
+    ),
+    child: FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Text(
+        score.isEmpty ? placeHolderValue : score,
+        style: GoogleFonts.acme(
+            color: score.isEmpty ? Colors.black54 : Colors.black,
+            fontSize: 17,
+            fontWeight: FontWeight.bold
+        ),
+      ),
+    ),
+  );
+}
