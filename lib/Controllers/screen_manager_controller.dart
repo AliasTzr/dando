@@ -22,10 +22,6 @@ class ScreenManagerController extends GetxController {
       "Acceuil",
       style: MyStyle(fontFamily: 'roboto', color: Colors.black, fontWeight: FontWeight.normal, fontSize: 14),
     ),
-    2: const Text(
-      "Formations",
-      style: MyStyle(fontFamily: 'roboto', color: Colors.black, fontWeight: FontWeight.normal, fontSize: 14),
-    )
   };
 
   listenToNotification() {

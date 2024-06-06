@@ -8,6 +8,5 @@ class ServerResponse {
   final String message;
   ServerResponse({required this.status, required this.message});
   Map<String, dynamic> toJson() => _$ServerResponseToJson(this);
-
   factory ServerResponse.fromJson(Map<String, dynamic> json) => _$ServerResponseFromJson(json);
 }

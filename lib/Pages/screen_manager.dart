@@ -6,9 +6,8 @@ import 'package:projet0_strat/Controllers/controller.dart';
 import 'package:projet0_strat/Controllers/screen_manager_controller.dart';
 import 'package:projet0_strat/Pages/data_saved.dart';
 import 'package:projet0_strat/Pages/home.dart';
-import 'package:projet0_strat/Pages/messages_ui.dart';
 
-class ScreenManager extends GetWidget {
+class ScreenManager extends GetWidget<ScreenManagerController> {
   const ScreenManager({super.key});
 
   @override
@@ -17,6 +16,7 @@ class ScreenManager extends GetWidget {
       onWillPop: () async {
         if ( Get.put(ScreenManagerController()).currentPage.value != 1) {
           Get.put(ScreenManagerController()).currentPage(1);
+          Get.put(ScreenManagerController()).changeScreen();
           return false;
         }
         return true;
@@ -28,7 +28,7 @@ class ScreenManager extends GetWidget {
             backgroundColor: Colors.white,
             elevation: 0,
             title: Text(
-              "Stratégie Basketball",
+              "Stratégie Score",
               style: MyStyle(fontFamily: Get.put(Controller()).oswaldFamily, color: Get.put(Controller()).tealColor, fontWeight: FontWeight.w600, fontSize: 16),
             ),
             centerTitle: true,
@@ -57,7 +57,7 @@ class ScreenManager extends GetWidget {
             child: PageView(
               physics: const NeverScrollableScrollPhysics(),
               controller: Get.put(ScreenManagerController()).pageController,
-              children: const [Storage(), Home(), MessagesUI()],
+              children: const [Storage(), Home()],
             ),
           ),
         ),
