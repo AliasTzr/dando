@@ -147,7 +147,7 @@ class LoginScreen extends GetView<LoginController> {
                         child: Obx(() => FittedBox(
                           fit: BoxFit.scaleDown,
                           child: Text(
-                            Get.put(LoginController()).codeToPaste.value,
+                            Get.put(LoginController()).codeToPaste.value.contains("TZ") ? Get.put(LoginController()).codeToPaste.value.toUpperCase() : Get.put(LoginController()).codeToPaste.value,
                             maxLines: 1,
                             overflow: TextOverflow.fade,
                             textAlign: TextAlign.center,

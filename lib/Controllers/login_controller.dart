@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:projet0_strat/Data/methodes.dart';
 import 'package:projet0_strat/Models/prefs_data.dart';
+import 'package:projet0_strat/api/api.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class LoginController extends GetxController with StateMixin<void> {
@@ -84,7 +85,6 @@ class LoginController extends GetxController with StateMixin<void> {
   ];
   late RxString codeToPaste;
   late RxInt textCaroussel;
-  String? _response = "";
   late PrefsData _prefsData;
   final String price = "9 000f cfa", _phoneNumber = "2250501128464", _instagram = 'sapi1049';
   @override
@@ -99,15 +99,15 @@ class LoginController extends GetxController with StateMixin<void> {
   Future<void> _accesProvider() async {
     change(null, status: RxStatus.loading());
     try {
-      // _response = await _me.client.code.activeAccount(codeToPaste.value);
-      if (_response == null) {
+      Api().useCode(codeToPaste.value).then((response){
         _prefsData.setBoolData("isLogged", true);
+        snackResult(response);
         Get.offAllNamed('/home');
-      } else {
-        change(null, status: RxStatus.error(_response));
+      }, onError: (error) async {
+        change(null, status: RxStatus.error(error.toString()));
         await Future.delayed(const Duration(seconds: 10));
         change(null, status: RxStatus.empty());
-      }
+      });
     } catch (e) {
       change(null, status: RxStatus.error("Oups !! Veuillez réessayer plus tard"));
       snackResult(
@@ -121,8 +121,8 @@ class LoginController extends GetxController with StateMixin<void> {
 
   Future<void> paste() async {
     String code = await FlutterClipboard.paste();
-    if (code.isNotEmpty) {
-      codeToPaste(code.toUpperCase().replaceAll(" ", ""));
+    if (code.isNotEmpty && code.trim().isNotEmpty) {
+      codeToPaste(code.replaceAll(" ", ""));
     } else {
       codeToPaste("Cliquer ici pour coller le code");
       snackResult("Aucun code recu");
@@ -130,7 +130,7 @@ class LoginController extends GetxController with StateMixin<void> {
   }
 
   void codeChecker() {
-    if (codeToPaste.value.length == 24 && codeToPaste.value.contains("VM")) {
+    if (codeToPaste.value.length == 24 && codeToPaste.value.contains("TZ")) {
       _accesProvider();
     } else {
       snackResult("Code incorrecte", success: false);
