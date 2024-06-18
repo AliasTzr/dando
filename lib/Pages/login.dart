@@ -17,7 +17,7 @@ class LoginScreen extends GetView<LoginController> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           title: Text(
-            "app-name",
+            "DanDo",
             style: MyStyle(fontFamily: "acme", color: Get.put(Controller()).blackColor, fontWeight: FontWeight.w600, fontSize: 15),
           ),
           centerTitle: true,
@@ -25,7 +25,7 @@ class LoginScreen extends GetView<LoginController> {
           automaticallyImplyLeading: false,
           actions: [
             IconButton(
-              onPressed: Get.put(LoginController()).goToAboutApp, 
+              onPressed: Get.put(LoginController()).goToAboutApp,
               icon: Icon(MdiIcons.informationVariantCircle),
               splashRadius: 20,
               iconSize: 25,

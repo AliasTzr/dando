@@ -2,10 +2,10 @@ import 'package:get/get_connect.dart';
 import 'package:projet0_strat/Models/Server/server_response.dart';
 
 class Api extends GetConnect {
-  final String ip = "192.168.120.103";
+  final String ip = "http://dandoappapi.xyz/api";
   Future<String> useCode(String code) async {
     Response response = await post(
-      "http://$ip:8000/api/use-code",
+      "$ip/use-code",
       {"code": code},
       headers: <String, String>{
         "Content-Type": "application/json"

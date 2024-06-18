@@ -17,7 +17,7 @@ class AboutApp extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           title: Text(
-            "A propos de app-name",
+            "A propos de DanDo",
             style: MyStyle(fontFamily: Get.put(Controller()).acmeFamily, color: Get.put(Controller()).blackColor, fontWeight: FontWeight.w600, fontSize: 17),
           ),
           centerTitle: true,

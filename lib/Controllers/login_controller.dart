@@ -49,7 +49,7 @@ class LoginController extends GetxController with StateMixin<void> {
     'assets/money_emoji.png',
   ];
   List<String> textCarousselList = [
-    "app-name, Vous donne toutes les clés pour devenir un expert en paris et maximiser vos chances de gagner.",
+    "DanDo, Vous donne toutes les clés pour devenir un expert en paris et maximiser vos chances de gagner.",
     "Nous vous offrons un univers complet pour vous accompagner vers la réussite dans les paris sportifs.",
     "Parier sur tout les sports, Des fonctionnalités avancées pour faire de vous un parieur professionnel et rentable.",
     "Une équipe de développeurs expérimentés et d'analystes passionnés par les paris sportifs est à votre service.",
@@ -66,27 +66,27 @@ class LoginController extends GetxController with StateMixin<void> {
       FontAwesomeIcons.telegram,
       color: Colors.blue.shade400,
     ),
-    const Icon(
-      FontAwesomeIcons.instagram,
-      color: Color(0xFFFF6F61),
-    ),
-    Icon(
-      FontAwesomeIcons.facebook,
-      color: Colors.blue.shade800,
-    ),
-    Icon(
-      FontAwesomeIcons.youtube,
-      color: Colors.red.shade700,
-    ),
-    const Icon(
-      FontAwesomeIcons.tiktok,
-      color: Colors.black,
-    )
+    // const Icon(
+    //   FontAwesomeIcons.instagram,
+    //   color: Color(0xFFFF6F61),
+    // ),
+    // Icon(
+    //   FontAwesomeIcons.facebook,
+    //   color: Colors.blue.shade800,
+    // ),
+    // Icon(
+    //   FontAwesomeIcons.youtube,
+    //   color: Colors.red.shade700,
+    // ),
+    // const Icon(
+    //   FontAwesomeIcons.tiktok,
+    //   color: Colors.black,
+    // )
   ];
   late RxString codeToPaste;
   late RxInt textCaroussel;
   late PrefsData _prefsData;
-  final String price = "9 000f cfa", _phoneNumber = "2250501128464", _instagram = 'sapi1049';
+  final String price = "12 990f cfa", _phoneNumber = "2250173871065", _instagram = 'sapi1049';
   @override
   void onInit() {
     super.onInit();
@@ -150,8 +150,7 @@ class LoginController extends GetxController with StateMixin<void> {
       url = 'https://www.instagram.com/$_instagram';
     }
     if (index == 3) {
-      url =
-          "https://www.facebook.com/groups/1800469253785660/?ref=share&mibextid=NSMWBT";
+      url = "https://www.facebook.com/groups/1800469253785660/?ref=share&mibextid=NSMWBT";
     }
     if (index == 4) {
       url = "https://www.youtube.com/@BighID_RTaZed";

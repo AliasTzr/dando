@@ -28,7 +28,7 @@ class ScreenManager extends GetWidget<ScreenManagerController> {
             backgroundColor: Colors.white,
             elevation: 0,
             title: Text(
-              "Stratégie Score",
+              "Stratégie Basket",
               style: MyStyle(fontFamily: Get.put(Controller()).oswaldFamily, color: Get.put(Controller()).tealColor, fontWeight: FontWeight.w600, fontSize: 16),
             ),
             centerTitle: true,

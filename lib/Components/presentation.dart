@@ -45,7 +45,7 @@ class Presentation extends StatelessWidget {
             ),
           );
         }
-      )).toList(), 
+      )).toList(),
       options: CarouselOptions(
         height: Get.height / 8,
         viewportFraction: 1,
