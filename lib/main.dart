@@ -1,7 +1,5 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:get/get.dart';
 import 'package:projet0_strat/Pages/about_app.dart';
 import 'package:projet0_strat/Pages/screen_manager.dart';
@@ -9,17 +7,13 @@ import 'package:projet0_strat/features/noti_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projet0_strat/Components/waiting_component.dart';
 import 'package:projet0_strat/Pages/login.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   await NotificationService.initNotificationService();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());
-  WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-    if (Platform.isAndroid) {
-      await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
-    }
-  });
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -61,6 +55,7 @@ class MyApp extends StatelessWidget {
   }
   Future<bool> isLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    FlutterNativeSplash.remove();
     return prefs.getBool('isLogged') ?? false;
   }
 }

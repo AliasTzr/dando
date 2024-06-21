@@ -7,7 +7,7 @@ class Controller extends GetxController {
   final Color tealColor = Colors.teal;
   final Color blackColor = Colors.black;
   final Color whiteColor = Colors.white;
-  final Color redColor = Color(0xFFD93041);
+  final Color redColor = const Color(0xFFD93041);
   final Color bgColor = const Color(0xFFF5F6F4);
   final Color orangeColor = const Color(0xFFFFA500); //Cette couleur complémentaire au teal peut créer un contraste énergique et accrocheur.
   final Color yelowColor = const Color(0xFFFFFF00); //Une teinte lumineuse de jaune peut apporter de la vivacité à votre palette de couleurs.

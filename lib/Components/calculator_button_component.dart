@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:projet0_strat/Components/my_text_style.dart';
 import 'package:projet0_strat/Controllers/controller.dart';
 
 
@@ -117,7 +117,7 @@ class _CalculatorButtonsState extends State<CalculatorButtons> {
                 height: controller.height * (1 / 11 + 1 / 50),
                 child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(controller.tealColor),
+                      backgroundColor: WidgetStateProperty.all(controller.tealColor),
                     ),
                     onPressed: (){
                       setState(() {
@@ -132,25 +132,21 @@ class _CalculatorButtonsState extends State<CalculatorButtons> {
                       });
 
                     },
-                    child: Column(
+                    child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         FittedBox(
                           fit: BoxFit.scaleDown,
                           child: Text(
                             "Match",
-                            style: GoogleFonts.acme(
-                              fontSize: 14,
-                            ),
+                            style: MyStyle(fontFamily: "acme", color: Colors.black, fontWeight: FontWeight.w500, fontSize: 14),
                           ),
                         ),
                         FittedBox(
                           fit: BoxFit.scaleDown,
                           child: Text(
                             "Préc.",
-                            style: GoogleFonts.acme(
-                              fontSize: 14,
-                            ),
+                            style: MyStyle(fontFamily: "acme", color: Colors.black, fontWeight: FontWeight.w500, fontSize: 14),
                           ),
                         ),
                       ],
@@ -168,15 +164,13 @@ class _CalculatorButtonsState extends State<CalculatorButtons> {
     height: controller.height / 22,
     child: TextButton(
         style: ButtonStyle(
-            elevation: MaterialStateProperty.all(numberSide && textValue != "Match suivant"  ? 0 : 3),
-            backgroundColor: MaterialStateProperty.all(textValue == "Match suivant" ? Colors.teal : Colors.white)
+            elevation: WidgetStateProperty.all(numberSide && textValue != "Match suivant"  ? 0 : 3),
+            backgroundColor: WidgetStateProperty.all(textValue == "Match suivant" ? Colors.teal : Colors.white)
         ),
         onPressed: onButtonPressed,
         child: Text(
           textValue,
-          style: GoogleFonts.acme(
-              fontSize: numberSide && textValue != "Match suivant" ? 20: 14, color: textValue == "Match suivant" ? Colors.white : Colors.teal
-          ),
+          style: MyStyle(fontFamily: "poppins", color: textValue == "Match suivant" ? Colors.white : Colors.teal, fontWeight: FontWeight.w500, fontSize: numberSide && textValue != "Match suivant" ? 20: 14),
         )
     ),
   );
@@ -194,11 +188,7 @@ class _CalculatorButtonsState extends State<CalculatorButtons> {
       fit: BoxFit.scaleDown,
       child: Text(
         score.isEmpty ? placeHolderValue : score,
-        style: GoogleFonts.acme(
-            color: score.isEmpty ? Colors.black54 : Colors.black,
-            fontSize: 17,
-            fontWeight: FontWeight.bold
-        ),
+        style: MyStyle(fontFamily: "poppins", color: score.isEmpty ? Colors.black54 : Colors.black, fontWeight: FontWeight.bold, fontSize: 17)
       ),
     ),
   );

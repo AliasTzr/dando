@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:projet0_strat/Models/matches_model.dart';
 import 'package:projet0_strat/Controllers/controller.dart';
@@ -48,11 +47,12 @@ class _MatchDetailsState extends State<MatchDetails> {
             fit: BoxFit.scaleDown,
             child: Text(
               widget.match.championship,
-              style: GoogleFonts.acme(
+              style: MyStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 15,
                   letterSpacing: 1,
-                color: controller.blackColor
+                color: controller.blackColor,
+                fontFamily: "acme"
               ),
             ),
           ),
@@ -90,9 +90,7 @@ class _MatchDetailsState extends State<MatchDetails> {
                     child: Text(
                         "Minimum par quartant  :    ${(int.parse(minTeamA) + int.parse(minTeamB))/4}",
                       textAlign: TextAlign.left,
-                      style: GoogleFonts.acme(
-                        fontSize: 17,
-                      ),
+                      style: MyStyle(fontFamily: "acme", color: Colors.black, fontWeight: FontWeight.w500, fontSize: 17)
                     ),
                   ),
                   const SizedBox(height: 10,),
@@ -102,9 +100,7 @@ class _MatchDetailsState extends State<MatchDetails> {
                     child: Text(
                       "Maximum par quartant  :    ${(int.parse(maxTeamA) + int.parse(maxTeamB))/4}",
                       textAlign: TextAlign.left,
-                      style: GoogleFonts.acme(
-                        fontSize: 17,
-                      ),
+                      style: const MyStyle(fontFamily: "acme", color: Colors.black, fontWeight: FontWeight.w500, fontSize: 14)
                     ),
                   ),
                   SizedBox(height: controller.height / 23,),
@@ -115,8 +111,8 @@ class _MatchDetailsState extends State<MatchDetails> {
                 height: controller.height * 0.06,
                 child: ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(controller.tealColor),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
+                    backgroundColor: WidgetStateProperty.all(controller.tealColor),
+                    shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
                   ),
                   onPressed: () async {
                     bool? updateSuccess = await Get.dialog(

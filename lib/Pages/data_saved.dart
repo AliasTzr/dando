@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:projet0_strat/Models/matches_model.dart';
 import 'package:projet0_strat/Controllers/controller.dart';
@@ -66,12 +65,10 @@ class _StorageState extends State<Storage> {
       future: databaseHelper.getMatches(),
       builder: (context, snapshot){
         if(snapshot.connectionState == ConnectionState.waiting){
-          return Center(
+          return const Center(
             child: Text(
                 "Chargement...",
-              style: GoogleFonts.acme(
-                color: Colors.grey
-              ),
+              style: MyStyle(fontFamily: "acme", color: Colors.grey, fontWeight: FontWeight.w500, fontSize: 14),
             )
           );
         }else if(snapshot.hasData){
@@ -147,19 +144,16 @@ class _StorageState extends State<Storage> {
                   ),
                 );
               }
-          ) : Center(
+          ) : const Center(
             child: Text(
                 "Aucune sauvegarde",
-              style: GoogleFonts.acme(
-                color: Colors.grey,
-                wordSpacing : 3
-              ),
+              style: MyStyle(fontFamily: "acme", color: Colors.grey, fontWeight: FontWeight.w500, fontSize: 14)
             ),
           );
         } else if(snapshot.hasError){
-          return Center(child: Text("Erreur dans la récuperation des données", style: GoogleFonts.acme(),),);
+          return const Center(child: Text("Erreur dans la récuperation des données", style: MyStyle(fontFamily: "acme", color: Colors.grey, fontWeight: FontWeight.w500, fontSize: 14),),);
         }
-        return Center(child: Text("Quelque chose n'a pas fonctionné", style: GoogleFonts.acme()),);
+        return const Center(child: Text("Quelque chose n'a pas fonctionné", style: MyStyle(fontFamily: "acme", color: Colors.grey, fontWeight: FontWeight.w500, fontSize: 14)),);
       }
     );
   }
