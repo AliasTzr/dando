@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:projet0_strat/Controllers/controller.dart';
 import 'package:projet0_strat/Components/table_header_component.dart';
 import 'package:projet0_strat/Components/table_row_component.dart';
+import 'package:projet0_strat/Controllers/controller.dart';
 
 import '../Data/methodes.dart';
 
@@ -16,7 +15,6 @@ class MinMaxCalculator extends StatefulWidget {
 }
 
 class _MinMaxCalculatorState extends State<MinMaxCalculator> {
-  final Controller controller = Get.put(Controller());
   String _minTeamA = '', _maxTeamA = '', _minTeamB = '', _maxTeamB = '';
 
   @override
@@ -34,7 +32,7 @@ class _MinMaxCalculatorState extends State<MinMaxCalculator> {
       children: [
         TableRow(
             children: [
-              SizedBox(height: controller.height / 27,),
+              SizedBox(height: Controller.height / 27,),
               TableHeaderComponent(textValue: "Score min", positionTop: true),
               TableHeaderComponent(textValue:  "Score max", positionTop: true)
             ]

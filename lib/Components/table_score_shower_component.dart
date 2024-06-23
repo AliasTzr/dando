@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:projet0_strat/Controllers/controller.dart';
 import 'package:projet0_strat/Data/methodes.dart';
 import 'package:projet0_strat/Components/table_header_component.dart';
@@ -9,9 +8,7 @@ class ScoreShower extends StatelessWidget {
   final List<String> scoresTeamA, scoresTeamB;
   final String? nameTeamA, nameTeamB;
   final int? countMatch;
-  ScoreShower({super.key, required this.scoresTeamA, required this.scoresTeamB, this.countMatch, this.nameTeamA, this.nameTeamB});
-  final Controller controller = Get.put(Controller());
-
+  const ScoreShower({super.key, required this.scoresTeamA, required this.scoresTeamB, this.countMatch, this.nameTeamA, this.nameTeamB});
   @override
   Widget build(BuildContext context) {
     return Table(
@@ -22,7 +19,7 @@ class ScoreShower extends StatelessWidget {
           bottom: BorderSide()
       ),
       columnWidths: <int, TableColumnWidth>{
-        0: FixedColumnWidth(controller.width / 5),
+        0: FixedColumnWidth(Controller.width / 5),
       },
       children: [
         TableRow(
@@ -47,7 +44,7 @@ class ScoreShower extends StatelessWidget {
         ),
         TableRow(
             children: [
-              TableHeaderComponent(textValue: "Total", positionTop: false),
+              const TableHeaderComponent(textValue: "Total", positionTop: false),
               TableRowComponent(textValue: calculate(scoresTeamA[0], scoresTeamB[0]), countMatch: countMatch, column: 0, isSynthesis: false),
               TableRowComponent(textValue: calculate(scoresTeamA[1], scoresTeamB[1]), countMatch: countMatch, column: 1, isSynthesis: false),
               TableRowComponent(textValue: calculate(scoresTeamA[2], scoresTeamB[2]), countMatch: countMatch, column: 2, isSynthesis: false),

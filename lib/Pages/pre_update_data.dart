@@ -18,7 +18,6 @@ class PreUpdateData extends StatefulWidget {
 }
 
 class _PreUpdateDataState extends State<PreUpdateData> {
-  final Controller controller = Get.find();
   DatabaseHelper databaseHelper = DatabaseHelper();
   final TextEditingController _newScoreTeamA = TextEditingController();
   final TextEditingController _newScoreTeamB = TextEditingController();
@@ -103,7 +102,7 @@ class _PreUpdateDataState extends State<PreUpdateData> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(horizontal: controller.width/20),
+      padding: EdgeInsets.symmetric(horizontal: Controller.width/20),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.only(bottom: 10),
@@ -120,29 +119,29 @@ class _PreUpdateDataState extends State<PreUpdateData> {
                     icon: const Icon(Icons.cancel, color: Colors.grey,)
                   ),
                 ),
-                Text(
+                const Text(
                   "Remplissez le formulaire",
-                  style: MyStyle(fontFamily: 'roboto', color: controller.tealColor, fontWeight: FontWeight.w700, fontSize: 15),
+                  style: MyStyle(fontFamily: 'roboto', color: Controller.tealColor, fontWeight: FontWeight.w700, fontSize: 15),
                 ),
                 const SizedBox(height: 5,),
                 formField(_newScoreTeamA, "Nouveau score (${widget.match.nameTeamA})", true),
                 const SizedBox(height: 5,),
                 formField(_newScoreTeamB, "Nouveau score (${widget.match.nameTeamB})", true),
                 const SizedBox(height: 15,),
-                Text(
+                const Text(
                   "Jour et heure du prochain match",
-                  style: MyStyle(fontFamily: 'roboto', color: controller.tealColor, fontWeight: FontWeight.w700, fontSize: 15),
+                  style: MyStyle(fontFamily: 'roboto', color: Controller.tealColor, fontWeight: FontWeight.w700, fontSize: 15),
                 ),
                 const SizedBox(height: 5,),
                 DateComponent(dateTime: _dateTime, timeOfDay: _timeOfDay, canSendNotification: _canSendNotification, date: _newDate, time: _newTime, getDateFunction: refreshDate, getTimeFunction: refreshTime),
                 const SizedBox(height: 15,),
                 SizedBox(
-                  width: controller.width * 3.8/5,
-                  height: controller.height * 0.06,
+                  width: Controller.width * 3.8/5,
+                  height: Controller.height * 0.06,
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(controller.tealColor),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
+                      backgroundColor: WidgetStateProperty.all(Controller.tealColor),
+                      shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
                     ),
                     onPressed: () async {
                       if (_newScoreTeamA.text.isNumericOnly && _newScoreTeamB.text.isNumericOnly) {
@@ -162,9 +161,9 @@ class _PreUpdateDataState extends State<PreUpdateData> {
                         snackResult('type de score non pris en charge', success: false, );
                       }
                     },
-                    child: Text(
+                    child: const Text(
                       "Sauvegarder",
-                      style: MyStyle(fontFamily: controller.oswaldFamily, color: controller.whiteColor, fontWeight: FontWeight.w600, fontSize: 16, letterSpacing: 2),
+                      style: MyStyle(fontFamily: Controller.oswaldFamily, color: Controller.whiteColor, fontWeight: FontWeight.w600, fontSize: 16, letterSpacing: 2),
                     ),
                   ),
                 ),

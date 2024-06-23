@@ -20,9 +20,7 @@ class MatchDetails2 extends StatefulWidget {
 }
 
 class _MatchDetails2State extends State<MatchDetails2> {
-  final Controller controller = Get.put(Controller());
   DatabaseHelper databaseHelper  = DatabaseHelper();
-
   Future<void> _loadMatchData() async {
     Duel updatedMatch = await databaseHelper.getMatchById(widget.match.id!);
     setState(() {
@@ -47,11 +45,11 @@ class _MatchDetails2State extends State<MatchDetails2> {
             fit: BoxFit.scaleDown,
             child: Text(
               widget.match.championship,
-              style: MyStyle(
+              style: const MyStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 15,
                   letterSpacing: 1,
-                color: controller.blackColor, fontFamily: 'acme'
+                color: Controller.blackColor, fontFamily: 'acme'
               ),
             ),
           ),
@@ -62,30 +60,30 @@ class _MatchDetails2State extends State<MatchDetails2> {
                 Get.back();
               },
               iconSize: 16,
-              icon: Icon(Icons.arrow_back_ios, color: controller.tealColor,)
+              icon: const Icon(Icons.arrow_back_ios, color: Controller.tealColor,)
           ),
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 10),
-              child: Icon(MdiIcons.fromString(widget.match.sport), color: controller.blackColor,),
+              child: Icon(MdiIcons.fromString(widget.match.sport), color: Controller.blackColor,),
             ),
           ],
         ),
         body: SizedBox(
-          width: controller.width,
-          height: controller.height,
+          width: Controller.width,
+          height: Controller.height,
           child: ListView(
             children: [
-              SizedBox(height: controller.height / 26,),
+              SizedBox(height: Controller.height / 26,),
               ScoreShower(scoresTeamA: scoresTeamAParseToList, scoresTeamB: scoresTeamBParseToList, nameTeamA: widget.match.nameTeamA, nameTeamB: widget.match.nameTeamB,),
-              SizedBox(height: controller.height / 20,),
+              SizedBox(height: Controller.height / 20,),
               MinMaxCalculator(scoresA: scoresTeamAParseToList, scoresB: scoresTeamBParseToList, nameTeamA: widget.match.nameTeamA, nameTeamB: widget.match.nameTeamB,),
-              SizedBox(height: controller.height / 23,),
+              SizedBox(height: Controller.height / 23,),
               widget.match.sport == "basketball" ? Column(
                 children: [
                 Container(
                   padding: const EdgeInsets.only(left: 10),
-                    width: controller.width,
+                    width: Controller.width,
                     child: Text(
                         "Minimum par quartant  :    ${(int.parse(minTeamA) + int.parse(minTeamB))/4}",
                       textAlign: TextAlign.left,
@@ -95,22 +93,22 @@ class _MatchDetails2State extends State<MatchDetails2> {
                   const SizedBox(height: 10,),
                   Container(
                     padding: const EdgeInsets.only(left: 10),
-                    width: controller.width,
+                    width: Controller.width,
                     child: Text(
                       "Maximum par quartant  :    ${(int.parse(maxTeamA) + int.parse(maxTeamB))/4}",
                       textAlign: TextAlign.left,
                       style: const MyStyle(fontFamily: "acme", color: Colors.grey, fontWeight: FontWeight.w500, fontSize: 17)
                     ),
                   ),
-                  SizedBox(height: controller.height / 23,),
+                  SizedBox(height: Controller.height / 23,),
                 ],
               ): const SizedBox.shrink(),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                height: controller.height * 0.06,
+                height: Controller.height * 0.06,
                 child: ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(controller.tealColor),
+                    backgroundColor: WidgetStateProperty.all(Controller.tealColor),
                     shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
                   ),
                   onPressed: () async {

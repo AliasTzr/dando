@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
-class MyIconButton extends IconButton {
-  MyIconButton({super.key, required IconData iconData, required bool? isLeading, Color color = Colors.black, void Function()? function}): super(
-    icon: Icon(
+// ignore: must_be_immutable
+class MyIconButton extends StatelessWidget {
+  final IconData iconData;
+  bool? isLeading;
+  Color? color;
+  void Function()? function;
+  MyIconButton({super.key, required this.iconData, required this.isLeading, this.color = Colors.black, this.function});
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(
         iconData,
       color: color,
     ),
     onPressed: isLeading! ? (){
-      Get.back();
+      context.pop();
     } : (){
       function?.call();
     },
     splashRadius: 20
-  );
+    );
+  }
 }

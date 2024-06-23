@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:projet0_strat/Components/my_text_style.dart';
 import 'package:projet0_strat/Controllers/controller.dart';
 import 'package:projet0_strat/Controllers/login_controller.dart';
 import 'package:projet0_strat/Components/presentation.dart';
+import 'package:projet0_strat/Data/route_named.dart';
 
 class LoginScreen extends GetView<LoginController> {
   const LoginScreen({super.key});
@@ -13,19 +15,21 @@ class LoginScreen extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Get.put(Controller()).bgColor,
+        backgroundColor: Controller.bgColor,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: Text(
+          title: const Text(
             "DanDo",
-            style: MyStyle(fontFamily: "acme", color: Get.put(Controller()).blackColor, fontWeight: FontWeight.w600, fontSize: 15),
+            style: MyStyle(fontFamily: "acme", color: Controller.blackColor, fontWeight: FontWeight.w600, fontSize: 15),
           ),
           centerTitle: true,
           elevation: 0,
           automaticallyImplyLeading: false,
           actions: [
             IconButton(
-              onPressed: Get.put(LoginController()).goToAboutApp,
+              onPressed: (){
+                context.goNamed(RoutesNamed.aboutapp);
+              },
               icon: Icon(MdiIcons.informationVariantCircle),
               splashRadius: 20,
               iconSize: 25,
@@ -85,7 +89,7 @@ class LoginScreen extends GetView<LoginController> {
                   (state) => const SizedBox.shrink(),
                   onEmpty: RichText(
                     text: TextSpan(
-                      style: MyStyle(fontFamily: "acme", color: Get.put(Controller()).blackColor, fontWeight: FontWeight.w500, fontSize: 15),
+                      style: const MyStyle(fontFamily: "acme", color: Controller.blackColor, fontWeight: FontWeight.w500, fontSize: 15),
                       children: [
                         const TextSpan(
                           text: "Profitez-en vite !\n",
@@ -112,8 +116,8 @@ class LoginScreen extends GetView<LoginController> {
                       ]
                     ),
                   ),
-                  onLoading: SpinKitPouringHourGlassRefined(
-                    color: Get.put(Controller()).tealColor,
+                  onLoading: const SpinKitPouringHourGlassRefined(
+                    color: Controller.tealColor,
                   ),
                   onError: (error) => Text(
                     error!, 
@@ -129,9 +133,9 @@ class LoginScreen extends GetView<LoginController> {
                   margin: EdgeInsets.zero,
                   padding: EdgeInsets.zero,
                   decoration: BoxDecoration(
-                    color: Get.put(Controller()).tealColor,
+                    color: Controller.tealColor,
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Get.put(Controller()).tealColor, width: 3)
+                    border: Border.all(color: Controller.tealColor, width: 3)
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -141,7 +145,7 @@ class LoginScreen extends GetView<LoginController> {
                         padding: const EdgeInsets.all(10),
                         margin: EdgeInsets.zero,
                         decoration: BoxDecoration(
-                          color: Get.put(Controller()).bgColor,
+                          color: Controller.bgColor,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Obx(() => FittedBox(
@@ -151,9 +155,9 @@ class LoginScreen extends GetView<LoginController> {
                             maxLines: 1,
                             overflow: TextOverflow.fade,
                             textAlign: TextAlign.center,
-                            style: MyStyle(
+                            style: const MyStyle(
                               fontFamily: 'acme',
-                              color: Get.put(Controller()).blackColor,
+                              color: Controller.blackColor,
                               fontWeight: FontWeight.bold,
                               fontSize: 19.5
                             ),
@@ -169,10 +173,12 @@ class LoginScreen extends GetView<LoginController> {
                 ),
               ),
               ElevatedButton(
-                onPressed: Get.put(LoginController()).codeChecker,
+                onPressed: (){
+                  Get.put(LoginController()).codeChecker(context);
+                },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Get.put(Controller()).tealColor),
-                  shape: MaterialStateProperty.all(const StadiumBorder()),
+                  backgroundColor: WidgetStateProperty.all(Controller.tealColor),
+                  shape: WidgetStateProperty.all(const StadiumBorder()),
                 ),
                 child: const Text(
                   "Vérifier",

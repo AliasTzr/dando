@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:projet0_strat/Controllers/controller.dart';
 import 'package:projet0_strat/Components/my_text_style.dart';
+import 'package:projet0_strat/Controllers/controller.dart';
 
 class TableHeaderComponent extends StatelessWidget {
    final String? textValue;
   final bool positionTop;
-   TableHeaderComponent({super.key, required this.textValue, required this.positionTop});
-   final Controller controller = Get.put(Controller());
+  const TableHeaderComponent({super.key, required this.textValue, required this.positionTop});
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: positionTop ? controller.height / 27 : controller.height / 18,
-      color: controller.blackColor,
+      height: positionTop ? Controller.height / 27 : Controller.height / 18,
+      color: Controller.blackColor,
       alignment: Alignment.center,
       child: FittedBox(
         child: Text(

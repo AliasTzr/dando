@@ -16,14 +16,14 @@ class ClickToBuy extends StatelessWidget {
           child: Text(
             "${Get.put(LoginController()).price} au lieu de 99 000f fcfa pour accéder à toutes les fonctionnalités de l'application.",
             textAlign: TextAlign.center,
-            style: MyStyle(fontFamily: Get.put(Controller()).acmeFamily, color: Colors.black, fontWeight: FontWeight.w600, fontSize: 15),
+            style: const MyStyle(fontFamily: Controller.acmeFamily, color: Colors.black, fontWeight: FontWeight.w600, fontSize: 15),
           ),
         ),
         SizedBox(
           width: Get.width - 15,
           child: MaterialButton(
             onPressed: Get.put(LoginController()).launchUrl, 
-            color: Get.put(Controller()).tealColor,
+            color: Controller.tealColor,
             padding: const EdgeInsets.symmetric(vertical: 15),
             child: const Text(
               "Clique ici pour acheter ton code",

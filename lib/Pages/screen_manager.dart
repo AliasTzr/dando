@@ -12,53 +12,43 @@ class ScreenManager extends GetWidget<ScreenManagerController> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        if ( Get.put(ScreenManagerController()).currentPage.value != 1) {
-          Get.put(ScreenManagerController()).currentPage(1);
-          Get.put(ScreenManagerController()).changeScreen();
-          return false;
-        }
-        return true;
-      },
-      child: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.white,
-            elevation: 0,
-            title: Text(
-              "Stratégie Basket",
-              style: MyStyle(fontFamily: Get.put(Controller()).oswaldFamily, color: Get.put(Controller()).tealColor, fontWeight: FontWeight.w600, fontSize: 16),
-            ),
-            centerTitle: true,
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(Get.height / 35),
-              child: Padding(
-                padding: const EdgeInsets.all(1),
-                child: SizedBox(
-                  width: Get.width / 1.1,
-                  child: Obx(() => CupertinoSlidingSegmentedControl(
-                    groupValue: Get.put(ScreenManagerController()).currentPage.value,
-                    children: Get.put(ScreenManagerController()).pagesWidget,
-                    onValueChanged: (newValue) {
-                      Get.put(ScreenManagerController()).currentPage(newValue!);
-                      Get.put(ScreenManagerController()).changeScreen();
-                    }
-                  )),
-                ),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: const Text(
+            "Stratégie Basket",
+            style: MyStyle(fontFamily: Controller.oswaldFamily, color: Controller.tealColor, fontWeight: FontWeight.w600, fontSize: 16),
+          ),
+          centerTitle: true,
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(Get.height / 35),
+            child: Padding(
+              padding: const EdgeInsets.all(1),
+              child: SizedBox(
+                width: Get.width / 1.1,
+                child: Obx(() => CupertinoSlidingSegmentedControl(
+                  groupValue: Get.put(ScreenManagerController()).currentPage.value,
+                  children: Get.put(ScreenManagerController()).pagesWidget,
+                  onValueChanged: (newValue) {
+                    Get.put(ScreenManagerController()).currentPage(newValue!);
+                    Get.put(ScreenManagerController()).changeScreen();
+                  }
+                )),
               ),
             ),
           ),
-          body: Container(
-            width: Get.width,
-            height: Get.height,
-            color: Colors.white,
-            child: PageView(
-              physics: const NeverScrollableScrollPhysics(),
-              controller: Get.put(ScreenManagerController()).pageController,
-              children: const [Storage(), Home()],
-            ),
+        ),
+        body: Container(
+          width: Get.width,
+          height: Get.height,
+          color: Colors.white,
+          child: PageView(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: Get.put(ScreenManagerController()).pageController,
+            children: const [Storage(), Home()],
           ),
         ),
       ),

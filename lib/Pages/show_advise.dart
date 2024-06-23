@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:projet0_strat/Models/advises_model.dart';
 import 'package:projet0_strat/Controllers/controller.dart';
-//AdviseDetails
+import 'package:projet0_strat/Models/advises_model.dart';
 
 class AdviseDetails extends StatelessWidget {
-  AdviseDetails({super.key});
-  final Controller controller = Get.put(Controller());
-  final Advise advise = Get.arguments;
-
+  final Advise advise;
+  const AdviseDetails({super.key, required this.advise});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -19,8 +16,8 @@ class AdviseDetails extends StatelessWidget {
             centerTitle: true,
             title: Text(
                 advise.title,
-              style: TextStyle(
-                color: controller.blackColor,
+              style: const TextStyle(
+                color: Controller.blackColor,
                 fontSize: 17
               ),
             ),
@@ -31,12 +28,12 @@ class AdviseDetails extends StatelessWidget {
                   Get.back();
                 },
                 iconSize: 16,
-                icon: Icon(Icons.arrow_back_ios, color: controller.tealColor,)
+                icon: const Icon(Icons.arrow_back_ios, color: Controller.tealColor,)
             ),
           ),
           body: Container(
-            height: controller.height,
-            width: controller.width,
+            height: Controller.height,
+            width: Controller.width,
             color: Colors.white,
             alignment: Alignment.center,
             child: Image.asset(

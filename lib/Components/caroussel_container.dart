@@ -31,9 +31,9 @@ class CarrousselContainer extends Container {
             children: [
               Text(
                 link, 
-                style: MyStyle(fontFamily: "acme", color: Get.put(Controller()).tealColor, fontWeight: FontWeight.bold, fontSize: 14),
+                style: const MyStyle(fontFamily: "acme", color: Controller.tealColor, fontWeight: FontWeight.bold, fontSize: 14),
               ),
-              Icon(MdiIcons.arrowRight, size: 14, color: Get.put(Controller()).tealColor,)
+              Icon(MdiIcons.arrowRight, size: 14, color: Controller.tealColor,)
             ],
           ),
         ) : const SizedBox.shrink()

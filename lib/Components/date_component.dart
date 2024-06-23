@@ -19,7 +19,6 @@ class DateComponent extends StatefulWidget {
 }
 
 class _DateComponentState extends State<DateComponent> {
-  Controller controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -28,12 +27,12 @@ class _DateComponentState extends State<DateComponent> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            width: controller.width * 4/10,
-            height: controller.height * 0.06,
+            width: Controller.width * 4/10,
+            height: Controller.height * 0.06,
             child: ElevatedButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.teal),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                backgroundColor: WidgetStateProperty.all(Colors.teal),
+                shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
               ),
               onPressed: () async {
                 widget.dateTime = await showDatePicker(
@@ -61,19 +60,19 @@ class _DateComponentState extends State<DateComponent> {
               child: FittedBox(
                 child: Text(
                   widget.date.isEmpty ? "Jour" : widget.date,
-                  style: MyStyle(fontFamily: controller.poppinsFamily, color: controller.whiteColor, fontWeight: FontWeight.w600, fontSize: 15),
+                  style: const MyStyle(fontFamily: Controller.poppinsFamily, color: Controller.whiteColor, fontWeight: FontWeight.w600, fontSize: 15),
                 ),
               ),
             ),
           ),
-          SizedBox(width: controller.width * 0.02,),
+          SizedBox(width: Controller.width * 0.02,),
           SizedBox(
-            width: controller.width * 2.2/10,
-            height: controller.height * 0.06,
+            width: Controller.width * 2.2/10,
+            height: Controller.height * 0.06,
             child: ElevatedButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.teal),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
+                backgroundColor: WidgetStateProperty.all(Colors.teal),
+                shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
               ),
               onPressed: () async {
                 widget.canSendNotification = true;
@@ -104,7 +103,7 @@ class _DateComponentState extends State<DateComponent> {
               child: FittedBox(
                 child: Text(
                   widget.time.isEmpty ? "Heure" : widget.time,
-                  style: MyStyle(fontFamily: controller.poppinsFamily, color: controller.whiteColor, fontWeight: FontWeight.w600, fontSize: 15),
+                  style: const MyStyle(fontFamily: Controller.poppinsFamily, color: Controller.whiteColor, fontWeight: FontWeight.w600, fontSize: 15),
                 ),
               ),
             ),

@@ -7,18 +7,17 @@ import 'package:projet0_strat/Controllers/login_controller.dart';
 
 // ignore: must_be_immutable
 class AboutApp extends StatelessWidget {
-  AboutApp({super.key});
-  Controller controller = Get.find();
+  const AboutApp({super.key});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: controller.bgColor,
+        backgroundColor: Controller.bgColor,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           title: Text(
             "A propos de DanDo",
-            style: MyStyle(fontFamily: Get.put(Controller()).acmeFamily, color: Get.put(Controller()).blackColor, fontWeight: FontWeight.w600, fontSize: 17),
+            style: MyStyle(fontFamily: Controller.acmeFamily, color: Controller.blackColor, fontWeight: FontWeight.w600, fontSize: 17),
           ),
           centerTitle: true,
           elevation: 0,
@@ -33,8 +32,8 @@ class AboutApp extends StatelessWidget {
               RichText(
                   text: TextSpan(
                       style: MyStyle(
-                          fontFamily: Get.put(Controller()).acmeFamily,
-                          color: Get.put(Controller()).blackColor,
+                          fontFamily: Controller.acmeFamily,
+                          color: Controller.blackColor,
                           fontWeight: FontWeight.w600,
                           fontSize: 16),
                       children: List.generate(
@@ -54,7 +53,7 @@ class AboutApp extends StatelessWidget {
                 child: Text(
                   "Quelle est ta situation ?",
                   style: MyStyle(
-                      fontFamily: Get.put(Controller()).acmeFamily,
+                      fontFamily: Controller.acmeFamily,
                       color: Colors.black,
                       fontWeight: FontWeight.w500,
                       fontSize: 15),
@@ -70,8 +69,8 @@ class AboutApp extends StatelessWidget {
                       child: Text(
                         Get.put(LoginController()).problems[index],
                         style: MyStyle(
-                            fontFamily: Get.put(Controller()).acmeFamily,
-                            color: Get.put(Controller()).blackColor,
+                            fontFamily: Controller.acmeFamily,
+                            color: Controller.blackColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 15),
                       ),
@@ -87,8 +86,8 @@ class AboutApp extends StatelessWidget {
                 child: Text(
                   "Si oui, alors cette application est faites pour toi.",
                   style: MyStyle(
-                      fontFamily: Get.put(Controller()).acmeFamily,
-                      color: Get.put(Controller()).blackColor,
+                      fontFamily: Controller.acmeFamily,
+                      color: Controller.blackColor,
                       fontWeight: FontWeight.w500,
                       fontSize: 15),
                 ),
@@ -103,12 +102,12 @@ class AboutApp extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
-                      color: Get.put(Controller()).orangeColor,
+                      color: Controller.orangeColor,
                     ),
                     child: RichText(
                         text: TextSpan(
                             style: MyStyle(
-                                fontFamily: Get.put(Controller()).acmeFamily,
+                                fontFamily: Controller.acmeFamily,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 15
@@ -136,7 +135,7 @@ class AboutApp extends StatelessWidget {
                 child: Text(
                   "Qu'est-ce que tu désires ?",
                   style: MyStyle(
-                      fontFamily: Get.put(Controller()).acmeFamily,
+                      fontFamily: Controller.acmeFamily,
                       color: Colors.black,
                       fontWeight: FontWeight.w500,
                       fontSize: 15),
@@ -152,8 +151,8 @@ class AboutApp extends StatelessWidget {
                       child: Text(
                         Get.put(LoginController()).desires[index],
                         style: MyStyle(
-                            fontFamily: Get.put(Controller()).acmeFamily,
-                            color: Get.put(Controller()).blackColor,
+                            fontFamily: Controller.acmeFamily,
+                            color: Controller.blackColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 15),
                       ),
@@ -169,8 +168,8 @@ class AboutApp extends StatelessWidget {
                 child: Text(
                   "Évidemment que c'est possible ! Cette application, te permettra de :",
                   style: MyStyle(
-                      fontFamily: Get.put(Controller()).acmeFamily,
-                      color: Get.put(Controller()).blackColor,
+                      fontFamily: Controller.acmeFamily,
+                      color: Controller.blackColor,
                       fontWeight: FontWeight.w500,
                       fontSize: 15),
                 ),
@@ -185,8 +184,8 @@ class AboutApp extends StatelessWidget {
                             child: Text(
                               Get.put(LoginController()).capabilities[index],
                               style: MyStyle(
-                                  fontFamily: Get.put(Controller()).acmeFamily,
-                                  color: Get.put(Controller()).blackColor,
+                                  fontFamily: Controller.acmeFamily,
+                                  color: Controller.blackColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15),
                             ),
@@ -201,8 +200,8 @@ class AboutApp extends StatelessWidget {
                 child: RichText(
                     text: TextSpan(
                         style: MyStyle(
-                            fontFamily: Get.put(Controller()).acmeFamily,
-                            color: Get.put(Controller()).blackColor,
+                            fontFamily: Controller.acmeFamily,
+                            color: Controller.blackColor,
                             fontWeight: FontWeight.w500,
                             fontSize: 15),
                         children: const [
@@ -228,7 +227,7 @@ class AboutApp extends StatelessWidget {
                 "Offre spécial !",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontFamily: Get.put(Controller()).acmeFamily,
+                    fontFamily: Controller.acmeFamily,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     decoration: TextDecoration.underline),
@@ -272,19 +271,19 @@ class AboutApp extends StatelessWidget {
 [
   const Text(
     "Intégrez notre communauté de parieurs gagnants et boostez vos gains !",
-    style: MyStyle(fontFamily: Get.put(Controller()).acmeFamily, color: Colors.black87, fontWeight: FontWeight.w900, fontSize: 20),
+    style: MyStyle(fontFamily: Controller.acmeFamily, color: Colors.black87, fontWeight: FontWeight.w900, fontSize: 20),
   ),
   SizedBox(height: Get.height / 50,),
   Text(
     "Avec notre aide et notre interface intuitive,\ndevenez un expert en paris en sportif et",
-    style: MyStyle(fontFamily: Get.put(Controller()).acmeFamily, color: Colors.grey.shade800, fontWeight: FontWeight.w400, fontSize: 18),
+    style: MyStyle(fontFamily: Controller.acmeFamily, color: Colors.grey.shade800, fontWeight: FontWeight.w400, fontSize: 18),
   ),
   SizedBox(
   width: Get.width,
     child: Text(
       "commencer à gagner dès aujourd'hui !",
       textAlign: TextAlign.left,
-      style: MyStyle(fontFamily: Get.put(Controller()).acmeFamily, color: Colors.grey.shade800, fontWeight: FontWeight.w600, fontSize: 18),
+      style: MyStyle(fontFamily: Controller.acmeFamily, color: Colors.grey.shade800, fontWeight: FontWeight.w600, fontSize: 18),
     ),
   ),
   SizedBox(
@@ -299,21 +298,21 @@ class AboutApp extends StatelessWidget {
   ),
   RichText(
     text: TextSpan(
-      style: MyStyle(fontFamily: Get.put(Controller()).acmeFamily, color: Colors.grey.shade800, fontWeight: FontWeight.w400, fontSize: 17),
+      style: MyStyle(fontFamily: Controller.acmeFamily, color: Colors.grey.shade800, fontWeight: FontWeight.w400, fontSize: 17),
       children: const [
         TextSpan(
           text: "Obtenez votre code d'accès avec "
         ),
         TextSpan(
           text: "9 000 F CFA",
-          style: MyStyle(fontFamily: Get.put(Controller()).acmeFamily, color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+          style: MyStyle(fontFamily: Controller.acmeFamily, color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
         ),
         TextSpan(
           text: " seulement au lieu de "
         ),
         TextSpan(
           text: "99 900 F CFA",
-          style: MyStyle(fontFamily: Get.put(Controller()).acmeFamily, color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+          style: MyStyle(fontFamily: Controller.acmeFamily, color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
         ),
       ]
     )

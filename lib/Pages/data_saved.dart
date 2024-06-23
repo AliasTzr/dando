@@ -15,7 +15,6 @@ class Storage extends StatefulWidget {
 }
 
 class _StorageState extends State<Storage> {
-  final Controller controller = Get.put(Controller());
   final GlobalKey<AnimatedListState> _keyList = GlobalKey();
   List<Duel> _matchesData = [];
   Future refreshMatchesState() async {
@@ -78,7 +77,7 @@ class _StorageState extends State<Storage> {
               key: _keyList,
               itemBuilder: (context, int index, animation){
                 return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: controller.width /20),
+                  padding: EdgeInsets.symmetric(horizontal: Controller.width /20),
                   child: SizeTransition(
                     sizeFactor: animation,
                     key: UniqueKey(),
@@ -89,12 +88,12 @@ class _StorageState extends State<Storage> {
                         contentPadding: const EdgeInsets.only(left: 10, top: 10),
                         horizontalTitleGap: 0,
                         minVerticalPadding: 0,
-                        leading: Icon(_matchesData[index].sport == "Type de sport" ? MdiIcons.fileQuestionOutline : MdiIcons.fromString(_matchesData[index].sport), color: controller.tealColor,),
+                        leading: Icon(_matchesData[index].sport == "Type de sport" ? MdiIcons.fileQuestionOutline : MdiIcons.fromString(_matchesData[index].sport), color: Controller.tealColor,),
                         title: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              width: controller.width / 1.85,
+                              width: Controller.width / 1.85,
                               alignment: Alignment.centerLeft,
                               child: FittedBox(
                                 fit: BoxFit.scaleDown,
@@ -107,7 +106,7 @@ class _StorageState extends State<Storage> {
                             ),
                             Container(
                               alignment: Alignment.centerRight,
-                              width: controller.width / 4.9,
+                              width: Controller.width / 4.9,
                               child: FittedBox(
                                 fit: BoxFit.scaleDown,
                                 child: Text(

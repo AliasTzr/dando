@@ -19,7 +19,6 @@ class PreSaveData extends StatefulWidget {
 }
 
 class _PreSaveDataState extends State<PreSaveData> {
-  final Controller controller = Get.find();
   String scoresTeamA = Get.arguments[0];
   String scoresTeamB = Get.arguments[1], dropdownValue = "Type de sport", _date = "", _time = "";
   DateTime? _dateTime;
@@ -110,7 +109,7 @@ class _PreSaveDataState extends State<PreSaveData> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(horizontal: controller.width/20),
+      padding: EdgeInsets.symmetric(horizontal: Controller.width/20),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.only(bottom: 10),
@@ -127,18 +126,18 @@ class _PreSaveDataState extends State<PreSaveData> {
                       icon: const Icon(Icons.cancel, color: Colors.grey,)
                   ),
                 ),
-                Text(
+                const Text(
                     "Remplissez le formulaire",
-                    style: MyStyle(fontFamily: controller.oswaldFamily, color: controller.tealColor, fontWeight: FontWeight.normal, fontSize: 17),
+                    style: MyStyle(fontFamily: Controller.oswaldFamily, color: Controller.tealColor, fontWeight: FontWeight.normal, fontSize: 17),
                 ),
                 const SizedBox(height: 10,),
                 SizedBox(
-                  width: controller.width * 3/5,
+                  width: Controller.width * 3/5,
                   child: DropdownButton(
                     value: dropdownValue,
                     isExpanded: true,
-                    menuMaxHeight: controller.height / 3.5,
-                    underline: Container(color: controller.tealColor, height: 2,),
+                    menuMaxHeight: Controller.height / 3.5,
+                    underline: Container(color: Controller.tealColor, height: 2,),
                     onChanged: (String? newValue){
                       setState(() {
                         dropdownValue = newValue!;
@@ -197,12 +196,12 @@ class _PreSaveDataState extends State<PreSaveData> {
                 DateComponent(dateTime: _dateTime, timeOfDay: _timeOfDay, canSendNotification: _canSendNotification, date: _date, time: _time, getDateFunction: refreshDate, getTimeFunction: refreshTime,),
                 const SizedBox(height: 15,),
                 SizedBox(
-                  width: controller.width * 3.8/5,
-                  height: controller.height * 0.06,
+                  width: Controller.width * 3.8/5,
+                  height: Controller.height * 0.06,
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.teal),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
+                      backgroundColor: WidgetStateProperty.all(Colors.teal),
+                      shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
                     ),
                     onPressed: () async {
                       if (_dateTime != null && _timeOfDay != null) {
@@ -223,9 +222,9 @@ class _PreSaveDataState extends State<PreSaveData> {
                         snackResult("La date et l'heure sont réquisent !", success: false);
                       }
                     },
-                    child: Text(
+                    child: const Text(
                       "Sauvegarder",
-                      style: MyStyle(fontFamily: controller.oswaldFamily, color: controller.whiteColor, fontWeight: FontWeight.w600, fontSize: 16, letterSpacing: 2),
+                      style: MyStyle(fontFamily: Controller.oswaldFamily, color: Controller.whiteColor, fontWeight: FontWeight.w600, fontSize: 16, letterSpacing: 2),
                     ),
                   ),
                 ),

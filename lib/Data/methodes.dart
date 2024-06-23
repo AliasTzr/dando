@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:projet0_strat/Components/my_text_style.dart';
 import 'package:projet0_strat/Controllers/controller.dart';
 
-final Controller controller = Get.put(Controller());
 
 String calculate(String score1, String score2){
   try{
@@ -44,7 +43,7 @@ void snackResult(String message, {bool success = true, bool bottomPosition = tru
         child: Text(
           success ? "Opération réussie" : "Attention !!!",
           textAlign: TextAlign.center,
-          style: MyStyle(fontFamily: controller.oswaldFamily, color: success ? controller.blackColor : controller.redColor, fontWeight: FontWeight.bold, fontSize: 18, letterSpacing: 2),
+          style: MyStyle(fontFamily: Controller.oswaldFamily, color: success ? Controller.blackColor : Controller.redColor, fontWeight: FontWeight.bold, fontSize: 18, letterSpacing: 2),
         ),
       ),
       messageText: SizedBox(
@@ -52,10 +51,10 @@ void snackResult(String message, {bool success = true, bool bottomPosition = tru
         child: Text(
           message,
           textAlign: TextAlign.center,
-          style: MyStyle(fontFamily: controller.poppinsFamily, color: controller.blackColor, fontWeight: FontWeight.w600, fontSize: 14),
+          style: const MyStyle(fontFamily: Controller.poppinsFamily, color: Controller.blackColor, fontWeight: FontWeight.w600, fontSize: 14),
         ),
       ),
-      backgroundColor:success ? Colors.tealAccent.shade400 : controller.greyColor,
+      backgroundColor:success ? Colors.tealAccent.shade400 : Controller.greyColor,
       snackPosition: bottomPosition ? SnackPosition.BOTTOM : SnackPosition.TOP,
       duration: const Duration(seconds: 5),
   );
@@ -91,7 +90,7 @@ Widget formField(TextEditingController controllerP, String hint, bool isForUpdat
       maxLines: 1,
       cursorColor: Colors.black,
       keyboardType: isForUpdating ? TextInputType.number : TextInputType.text,
-      style: MyStyle(fontFamily: controller.poppinsFamily, color: controller.blackColor, fontWeight: FontWeight.w600, fontSize: 14),
+      style: const MyStyle(fontFamily: Controller.poppinsFamily, color: Controller.blackColor, fontWeight: FontWeight.w600, fontSize: 14),
       decoration: InputDecoration(
           hintText: hint,
           border: InputBorder.none,

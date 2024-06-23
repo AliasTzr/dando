@@ -57,6 +57,7 @@ dependencies:
   rxdart: ^0.28.0
   json_annotation: ^4.9.0
   screen_protector: ^1.4.2
+  go_router: ^14.2.0
 
 dev_dependencies:
   flutter_test:

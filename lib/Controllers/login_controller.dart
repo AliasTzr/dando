@@ -2,7 +2,9 @@ import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:projet0_strat/Data/methodes.dart';
+import 'package:projet0_strat/Data/route_named.dart';
 import 'package:projet0_strat/Models/prefs_data.dart';
 import 'package:projet0_strat/api/api.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -86,7 +88,9 @@ class LoginController extends GetxController with StateMixin<void> {
   late RxString codeToPaste;
   late RxInt textCaroussel;
   late PrefsData _prefsData;
-  final String price = "12 990f cfa", _phoneNumber = "2250173871065", _instagram = 'sapi1049';
+  final String price = "12 990f cfa",
+      _phoneNumber = "2250173871065",
+      _instagram = 'sapi1049';
   @override
   void onInit() {
     super.onInit();
@@ -96,20 +100,22 @@ class LoginController extends GetxController with StateMixin<void> {
     change(null, status: RxStatus.empty());
   }
 
-  Future<void> _accesProvider() async {
+  Future<void> _accesProvider(BuildContext context) async {
     change(null, status: RxStatus.loading());
     try {
-      Api().useCode(codeToPaste.value).then((response){
+      Api().useCode(codeToPaste.value).then((response) {
         _prefsData.setBoolData("isLogged", true);
         snackResult(response);
-        Get.offAllNamed('/home');
+        context.goNamed(RoutesNamed.home);
+        context.pop();  
       }, onError: (error) async {
         change(null, status: RxStatus.error(error.toString()));
         await Future.delayed(const Duration(seconds: 10));
         change(null, status: RxStatus.empty());
       });
     } catch (e) {
-      change(null, status: RxStatus.error("Oups !! Veuillez réessayer plus tard"));
+      change(null,
+          status: RxStatus.error("Oups !! Veuillez réessayer plus tard"));
       snackResult(
         "Vérifier votre connexion internet.",
         success: false,
@@ -129,16 +135,12 @@ class LoginController extends GetxController with StateMixin<void> {
     }
   }
 
-  void codeChecker() {
+  void codeChecker(BuildContext context) {
     if (codeToPaste.value.length == 24 && codeToPaste.value.contains("TZ")) {
-      _accesProvider();
+      _accesProvider(context);
     } else {
       snackResult("Code incorrecte", success: false);
     }
-  }
-
-  void goToAboutApp() {
-    Get.toNamed("/aboutapp");
   }
 
   Future<void> launchUrl({int? index}) async {
@@ -150,7 +152,8 @@ class LoginController extends GetxController with StateMixin<void> {
       url = 'https://www.instagram.com/$_instagram';
     }
     if (index == 3) {
-      url = "https://www.facebook.com/groups/1800469253785660/?ref=share&mibextid=NSMWBT";
+      url =
+          "https://www.facebook.com/groups/1800469253785660/?ref=share&mibextid=NSMWBT";
     }
     if (index == 4) {
       url = "https://www.youtube.com/@BighID_RTaZed";

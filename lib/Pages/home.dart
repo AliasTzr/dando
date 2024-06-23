@@ -14,7 +14,6 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 class _HomeState extends State<Home> {
-  final Controller controller = Get.put(Controller());
   String scoreA = "", scoreB = "";
   bool caseASelected = true, caseBSelected = false;
   int countMatch = 0;
@@ -28,22 +27,22 @@ class _HomeState extends State<Home> {
       shrinkWrap: true,
       physics: const ClampingScrollPhysics(),
       children: [
-        SizedBox(height: controller.height / 26,),
+        SizedBox(height: Controller.height / 26,),
         ScoreShower(scoresTeamA: scoresTeamA, scoresTeamB: scoresTeamB, countMatch: countMatch),
-        SizedBox(height: controller.height / 20,),
+        SizedBox(height: Controller.height / 20,),
         MinMaxCalculator(scoresA: scoresTeamA, scoresB: scoresTeamB),
-        SizedBox(height: controller.height / 23,),
+        SizedBox(height: Controller.height / 23,),
         Row(
           children: [
             Container(
-              width: controller.width * 3 / 4,
-              height: controller.height / 2.95,
-              padding: EdgeInsets.symmetric(horizontal: controller.width / 33),
+              width: Controller.width * 3 / 4,
+              height: Controller.height / 2.95,
+              padding: EdgeInsets.symmetric(horizontal: Controller.width / 33),
               child: Column(
                 children: [
                   SizedBox(
-                    width: controller.width,
-                    height: controller.height / 12,
+                    width: Controller.width,
+                    height: Controller.height / 12,
                     child: Row(
                       children: [
                         InkWell(
@@ -71,37 +70,37 @@ class _HomeState extends State<Home> {
                   Row(
                     children: [
                       calculatorButton(textValue: "1", numberSide: true),
-                      SizedBox(width: controller.width / 25,),
+                      SizedBox(width: Controller.width / 25,),
                       calculatorButton(textValue: "2", numberSide: true),
-                      SizedBox(width: controller.width / 25,),
+                      SizedBox(width: Controller.width / 25,),
                       calculatorButton(textValue: "3", numberSide: true),
                     ],
                   ),
-                  SizedBox(height: controller.height / 50,),
+                  SizedBox(height: Controller.height / 50,),
                   Row(
                     children: [
                       calculatorButton(textValue: "4", numberSide: true),
-                      SizedBox(width: controller.width / 25,),
+                      SizedBox(width: Controller.width / 25,),
                       calculatorButton(textValue: "5", numberSide: true),
-                      SizedBox(width: controller.width / 25,),
+                      SizedBox(width: Controller.width / 25,),
                       calculatorButton(textValue: "6", numberSide: true),
                     ],
                   ),
-                  SizedBox(height: controller.height / 50,),
+                  SizedBox(height: Controller.height / 50,),
                   Row(
                     children: [
                       calculatorButton(textValue: "7", numberSide: true),
-                      SizedBox(width: controller.width / 25,),
+                      SizedBox(width: Controller.width / 25,),
                       calculatorButton(textValue: "8", numberSide: true),
-                      SizedBox(width: controller.width / 25,),
+                      SizedBox(width: Controller.width / 25,),
                       calculatorButton(textValue: "9", numberSide: true),
                     ],
                   ),
-                  SizedBox(height: controller.height / 50,),
+                  SizedBox(height: Controller.height / 50,),
                   Row(
                     children: [
                       calculatorButton(textValue: "0", numberSide: true),
-                      SizedBox(width: controller.width / 25,),
+                      SizedBox(width: Controller.width / 25,),
                       calculatorButton(textValue: "Match suivant", numberSide: true),
                     ],
                   ),
@@ -109,24 +108,24 @@ class _HomeState extends State<Home> {
               ),
             ),
             Container(
-              width: controller.width / 4,
-              height: controller.height / 2.95,
-              padding: EdgeInsets.only(top: controller.width / 24, right: controller.width / 33),
+              width: Controller.width / 4,
+              height: Controller.height / 2.95,
+              padding: EdgeInsets.only(top: Controller.width / 24, right: Controller.width / 33),
               child: Column(
                 children: [
                   calculatorButton(textValue: "Supp.", numberSide: false),
-                  SizedBox(height: controller.height / 52,),
+                  SizedBox(height: Controller.height / 52,),
                   calculatorButton(textValue: "Vider", numberSide: false),
-                  SizedBox(height: controller.height / 52,),
+                  SizedBox(height: Controller.height / 52,),
                   calculatorButton(textValue: "Sauv.", numberSide: false),
-                  SizedBox(height: controller.height / 52,),
+                  SizedBox(height: Controller.height / 52,),
                   SizedBox(
-                    width: controller.width / 4,
-                    height: controller.height * (1 / 11 + 1 / 50),
+                    width: Controller.width / 4,
+                    height: Controller.height * (1 / 11 + 1 / 50),
                     child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(controller.tealColor),
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
+                          backgroundColor: WidgetStateProperty.all(Controller.tealColor),
+                          shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
                         ),
                         onPressed: (){
                           setState(() {
@@ -167,13 +166,13 @@ class _HomeState extends State<Home> {
     );
   }
   Widget calculatorButton({required String textValue, bool? numberSide}) => SizedBox(
-    width: numberSide! ? textValue == "Match suivant" ? (controller.width * (1 / 2.475 + 1/25) ) : controller.width / 4.95 : controller.width / 4,
-    height: controller.height / 22,
+    width: numberSide! ? textValue == "Match suivant" ? (Controller.width * (1 / 2.475 + 1/25) ) : Controller.width / 4.95 : Controller.width / 4,
+    height: Controller.height / 22,
     child: ElevatedButton(
         style: ButtonStyle(
-            elevation: MaterialStateProperty.all(numberSide && textValue != "Match suivant"  ? 5 : 2),
-            backgroundColor: MaterialStateProperty.all(textValue == "Match suivant" ? Colors.teal : Colors.white),
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
+            elevation: WidgetStateProperty.all(numberSide && textValue != "Match suivant"  ? 5 : 2),
+            backgroundColor: WidgetStateProperty.all(textValue == "Match suivant" ? Colors.teal : Colors.white),
+            shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
         ),
         onPressed: () async {
           int scoreAAsInt = 0;
@@ -258,8 +257,8 @@ class _HomeState extends State<Home> {
   Widget textFieldSelector({required String score, required String placeHolderValue, required bool caseSelected}) => AnimatedContainer(
     duration: const Duration(milliseconds: 500),
     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-    width: controller.width / 3,
-    height: controller.height / 17,
+    width: Controller.width / 3,
+    height: Controller.height / 17,
     decoration: BoxDecoration(
       color: caseSelected ? Colors.teal : Colors.black12,
       borderRadius: BorderRadius.circular(5.0),
