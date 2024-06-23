@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:projet0_strat/Components/date_component.dart';
 import 'package:projet0_strat/Controllers/controller.dart';
 import 'package:projet0_strat/Models/matches_model.dart';
@@ -21,6 +22,7 @@ class _PreUpdateDataState extends State<PreUpdateData> {
   DatabaseHelper databaseHelper = DatabaseHelper();
   final TextEditingController _newScoreTeamA = TextEditingController();
   final TextEditingController _newScoreTeamB = TextEditingController();
+  final GlobalKey<_PreUpdateDataState> myKey = GlobalKey();
   String _newTime = "", _newDate = "";
   DateTime? _dateTime;
   TimeOfDay? _timeOfDay;
@@ -144,6 +146,7 @@ class _PreUpdateDataState extends State<PreUpdateData> {
                       shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
                     ),
                     onPressed: () async {
+                      final context = myKey.currentContext;
                       if (_newScoreTeamA.text.isNumericOnly && _newScoreTeamB.text.isNumericOnly) {
                         String newScoreA = insertNewScore(widget.match.scoresTeamA, int.parse(_newScoreTeamA.text).toString());
                         String newScoreB = insertNewScore(widget.match.scoresTeamB, int.parse(_newScoreTeamB.text).toString());
@@ -155,7 +158,10 @@ class _PreUpdateDataState extends State<PreUpdateData> {
                           } else {
                             snackResult("Vous ne serez pas notifié pour cet évènement !\nAutoriser les notifications ou changer l'heure puis réessayer !");
                           }
-                          Get.back(result: true);
+                          if (context != null && context.mounted) {
+                            context.pop(true);
+                          }
+
                         }
                       } else {
                         snackResult('type de score non pris en charge', success: false, );

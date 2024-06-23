@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projet0_strat/Components/caroussel_container.dart';
-import 'package:projet0_strat/Controllers/login_controller.dart';
+import 'package:projet0_strat/Data/login_data.dart';
 
 class Presentation extends StatelessWidget {
   const Presentation({super.key});
@@ -32,14 +32,14 @@ class Presentation extends StatelessWidget {
                     shape: BoxShape.circle
                   ),
                   child: Image.asset(
-                    Get.put(LoginController()).images[i],
+                    LoginData.images[i],
                     fit: BoxFit.fill,
                   ),
                 ),
                 CarrousselContainer(
-                  title: i == 0 || i == 2 ? Get.put(LoginController()).textCarousselList[i].split(", ")[0] : null,
-                  content: i == 0 || i == 2 ? Get.put(LoginController()).textCarousselList[i].split(", ")[1] : i == 5 ? Get.put(LoginController()).textCarousselList[i].split("!")[0] : Get.put(LoginController()).textCarousselList[i],
-                  link: i == 5 ? Get.put(LoginController()).textCarousselList[i].split("!")[1] : null,
+                  title: i == 0 || i == 2 ? LoginData.textCarousselList[i].split(", ")[0] : null,
+                  content: i == 0 || i == 2 ? LoginData.textCarousselList[i].split(", ")[1] : i == 5 ? LoginData.textCarousselList[i].split("!")[0] : LoginData.textCarousselList[i],
+                  link: i == 5 ? LoginData.textCarousselList[i].split("!")[1] : null,
                 )
               ],
             ),

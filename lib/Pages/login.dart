@@ -20,7 +20,7 @@ class LoginScreen extends GetView<LoginController> {
           backgroundColor: Colors.transparent,
           title: const Text(
             "DanDo",
-            style: MyStyle(fontFamily: "acme", color: Controller.blackColor, fontWeight: FontWeight.w600, fontSize: 15),
+            style: MyStyle(fontFamily: "acme", color: Controller.blackColor, fontWeight: FontWeight.w600, fontSize: 18),
           ),
           centerTitle: true,
           elevation: 0,
@@ -44,40 +44,6 @@ class LoginScreen extends GetView<LoginController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Container(//Carroussel qui defile taduisant le text ci dessous
-              //   width: Get.width / 3.4,
-              //   height: Get.height / 8,
-              //   color: Colors.amber,
-              // ),
-              // RichText(
-              //   text: const TextSpan(
-              //     style: MyStyle(fontFamily: "acme", color: Colors.black87, fontWeight: FontWeight.w400, fontSize: 17),
-              //     children: [
-              //       TextSpan(
-              //         text: "-",
-              //         style: TextStyle(
-              //           fontSize: 25,
-              //           fontWeight: FontWeight.bold,
-              //           fontFamily: "roboto"
-              //         )
-              //       ),
-              //       TextSpan(
-              //         text: "Des fonctionnalités et des méthodes pour faire de vous un parieur rentable.\n"
-              //       ),
-              //       TextSpan(
-              //         text: "-",
-              //         style: TextStyle(
-              //           fontSize: 25,
-              //           fontWeight: FontWeight.bold,
-              //           fontFamily: "roboto"
-              //         )
-              //       ),
-              //       TextSpan(
-              //         text: "Une équipe de dévéloppeurs à votre service."
-              //       ),
-              //     ]
-              //   )
-              // ),
               const Presentation(),
               Container(
                 height: Get.height / 10,

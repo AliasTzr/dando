@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:projet0_strat/Models/matches_model.dart';
 import 'package:projet0_strat/Controllers/controller.dart';
@@ -21,7 +21,7 @@ class MatchDetails extends StatefulWidget {
 
 class _MatchDetailsState extends State<MatchDetails> {
   DatabaseHelper databaseHelper  = DatabaseHelper();
-
+  final GlobalKey<_MatchDetailsState> myKey = GlobalKey();
   Future<void> _loadMatchData() async {
     Duel updatedMatch = await databaseHelper.getMatchById(widget.match.id!);
     setState(() {
@@ -59,7 +59,7 @@ class _MatchDetailsState extends State<MatchDetails> {
           automaticallyImplyLeading: false,
           leading: IconButton(
               onPressed: (){
-                Get.back();
+                context.pop();
               },
               iconSize: 16,
               icon: const Icon(Icons.arrow_back_ios, color: Controller.tealColor,)
@@ -114,13 +114,13 @@ class _MatchDetailsState extends State<MatchDetails> {
                     shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
                   ),
                   onPressed: () async {
-                    bool? updateSuccess = await Get.dialog(
-                      PreUpdateData(match: widget.match,),
-                      transitionDuration: const Duration(seconds: 1),
-                      transitionCurve: Curves.easeIn,
+                    final context = myKey.currentContext;
+                    bool? updateSuccess = await showDialog(
+                      context: context!, 
+                      builder: (_) => PreUpdateData(match: widget.match,),
                       barrierDismissible: false,
                     );
-                    if(updateSuccess != null && updateSuccess){
+                    if(updateSuccess != null && updateSuccess && context.mounted){
                       await _loadMatchData();
                       snackResult("Mise à jour réussi", success: true);
                     }

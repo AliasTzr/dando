@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:projet0_strat/Components/date_component.dart';
 import 'package:projet0_strat/Components/dropdown_child.dart';
 import 'package:projet0_strat/Controllers/controller.dart';
@@ -12,15 +12,15 @@ import 'package:projet0_strat/Models/matches_model.dart';
 import 'package:projet0_strat/features/noti_service.dart';
 
 class PreSaveData extends StatefulWidget {
-  const PreSaveData({super.key});
+  final String scoresTeamA, scoresTeamB;
+  const PreSaveData({super.key, required this.scoresTeamA, required this.scoresTeamB});
 
   @override
   State<PreSaveData> createState() => _PreSaveDataState();
 }
 
 class _PreSaveDataState extends State<PreSaveData> {
-  String scoresTeamA = Get.arguments[0];
-  String scoresTeamB = Get.arguments[1], dropdownValue = "Type de sport", _date = "", _time = "";
+  String dropdownValue = "Type de sport", _date = "", _time = "";
   DateTime? _dateTime;
   TimeOfDay? _timeOfDay;
   bool _canSendNotification = true, _notificationsEnabled = false;
@@ -29,6 +29,7 @@ class _PreSaveDataState extends State<PreSaveData> {
   final TextEditingController _nameTeamA = TextEditingController();
   final TextEditingController _nameTeamB = TextEditingController();
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  final GlobalKey<_PreSaveDataState> myKey = GlobalKey();
 
   void refreshDate(DateTime? getDateTime, String getDate) {
     setState(() {
@@ -120,7 +121,7 @@ class _PreSaveDataState extends State<PreSaveData> {
                   alignment: Alignment.topRight,
                   child: IconButton(
                       onPressed: (){
-                        Get.back();
+                        context.pop();
                       },
                       splashRadius: 20,
                       icon: const Icon(Icons.cancel, color: Colors.grey,)
@@ -204,17 +205,20 @@ class _PreSaveDataState extends State<PreSaveData> {
                       shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
                     ),
                     onPressed: () async {
+                      final context = myKey.currentContext;
                       if (_dateTime != null && _timeOfDay != null) {
                         int id = 0;
                         if(_championship.text.isNotEmpty && _nameTeamA.text.isNotEmpty && _nameTeamB.text.isNotEmpty && _date.isNotEmpty && _time.isNotEmpty){
-                          id = await databaseHelper.insertMatch(Duel(sport: dropdownValue, championship: _championship.text, nameTeamA: _nameTeamA.text, scoresTeamA: scoresTeamA, nameTeamB: _nameTeamB.text, scoresTeamB: scoresTeamB, dataMatch: _date, timeMatch: _time));
+                          id = await databaseHelper.insertMatch(Duel(sport: dropdownValue, championship: _championship.text, nameTeamA: _nameTeamA.text, scoresTeamA: widget.scoresTeamA, nameTeamB: _nameTeamB.text, scoresTeamB: widget.scoresTeamB, dataMatch: _date, timeMatch: _time));
                           if (_canSendNotification && _notificationsEnabled) {
                             DateTime dateTime = DateTime(_dateTime!.year, _dateTime!.month, _dateTime!.day, _timeOfDay!.hour, _timeOfDay!.minute);
                             await NotificationService.scheduleNotification(title: "${_nameTeamA.text} - ${_nameTeamB.text}", payload: id.toString(), dateTime: dateTime);
                           } else {
                             snackResult("Vous ne serez pas notifié pour cet évènement !\nAutoriser les notifications ou changer l'heure puis réessayer !");
                           }
-                          Get.back(result: true);
+                          if (context != null && context.mounted) {
+                            context.pop(true);
+                          }
                         } else {
                           snackResult("Tous les champs sont réquis !", success: false);
                         }

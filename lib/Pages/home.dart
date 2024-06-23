@@ -20,6 +20,7 @@ class _HomeState extends State<Home> {
   List<String> scoresTeamA = List.filled(5, "");
   List<String> scoresTeamB = List.filled(5, "");
   String minScoreA = "", minScoreB = "", maxScoreA = "", maxScoreB = "", scoresTeamAForDatabase = "", scoresTeamBForDatabase = "";
+  final GlobalKey<_HomeState> myKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -229,14 +230,12 @@ class _HomeState extends State<Home> {
           });
           if(textValue == "Sauv.") {
             if(scoresTeamA[3].isNotEmpty){
-              bool? saveSuccess = await Get.dialog(
-                const PreSaveData(),
-                transitionDuration: const Duration(milliseconds: 500),
-                transitionCurve: Curves.easeIn,
-                arguments: [scoresTeamAForDatabase, scoresTeamBForDatabase],
+              bool? saveSuccess = await showDialog(
+                context: myKey.currentContext!,
+                builder: (_) => PreSaveData(scoresTeamA: scoresTeamAForDatabase, scoresTeamB: scoresTeamBForDatabase,),
                 barrierDismissible: false,
               );
-              if(saveSuccess != null && saveSuccess){
+              if(saveSuccess != null && saveSuccess && myKey.currentContext!.mounted){
                 snackResult("Sauvegarde réussi.", success: true);
               }
             } else {

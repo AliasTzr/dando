@@ -4,6 +4,7 @@ import 'package:projet0_strat/Components/click_to_buy_component.dart';
 import 'package:projet0_strat/Components/my_text_style.dart';
 import 'package:projet0_strat/Controllers/controller.dart';
 import 'package:projet0_strat/Controllers/login_controller.dart';
+import 'package:projet0_strat/Data/login_data.dart';
 
 // ignore: must_be_immutable
 class AboutApp extends StatelessWidget {
@@ -15,7 +16,7 @@ class AboutApp extends StatelessWidget {
         backgroundColor: Controller.bgColor,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: Text(
+          title: const Text(
             "A propos de DanDo",
             style: MyStyle(fontFamily: Controller.acmeFamily, color: Controller.blackColor, fontWeight: FontWeight.w600, fontSize: 17),
           ),
@@ -24,22 +25,22 @@ class AboutApp extends StatelessWidget {
           automaticallyImplyLeading: true,
         ),
         body: Container(
-          width: Get.width,
+          width: Controller.width,
           height: Get.height,
           color: Colors.transparent,
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 3),
             child: ListView(physics: const ClampingScrollPhysics(), children: [
               RichText(
                   text: TextSpan(
-                      style: MyStyle(
+                      style: const MyStyle(
                           fontFamily: Controller.acmeFamily,
                           color: Controller.blackColor,
                           fontWeight: FontWeight.w600,
                           fontSize: 16),
                       children: List.generate(
-                          Get.put(LoginController()).titles.length,
+                          LoginData.titles.length,
                           (index) => TextSpan(
-                                text: Get.put(LoginController()).titles[index],
+                                text: LoginData.titles[index],
                                 style: TextStyle(
                                     color: index % 2 == 0
                                         ? Colors.red.shade700
@@ -49,8 +50,8 @@ class AboutApp extends StatelessWidget {
                 height: 10,
               ),
               SizedBox(
-                width: Get.width,
-                child: Text(
+                width: Controller.width,
+                child: const Text(
                   "Quelle est ta situation ?",
                   style: MyStyle(
                       fontFamily: Controller.acmeFamily,
@@ -61,14 +62,14 @@ class AboutApp extends StatelessWidget {
               ),
               Column(
                 children: List.generate(
-                  Get.put(LoginController()).problems.length,
+                  LoginData.problems.length,
                   (index) => Padding(
                     padding: const EdgeInsets.only(bottom: 5),
                     child: SizedBox(
-                      width: Get.width,
+                      width: Controller.width,
                       child: Text(
-                        Get.put(LoginController()).problems[index],
-                        style: MyStyle(
+                        LoginData.problems[index],
+                        style: const MyStyle(
                             fontFamily: Controller.acmeFamily,
                             color: Controller.blackColor,
                             fontWeight: FontWeight.bold,
@@ -82,8 +83,8 @@ class AboutApp extends StatelessWidget {
                 height: 5,
               ),
               SizedBox(
-                width: Get.width,
-                child: Text(
+                width: Controller.width,
+                child: const Text(
                   "Si oui, alors cette application est faites pour toi.",
                   style: MyStyle(
                       fontFamily: Controller.acmeFamily,
@@ -98,7 +99,7 @@ class AboutApp extends StatelessWidget {
                 child: InkWell(
                   onTap: Get.put(LoginController()).launchUrl,
                   child: Container(
-                    width: Get.width,
+                    width: Controller.width,
                     padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
@@ -106,7 +107,7 @@ class AboutApp extends StatelessWidget {
                     ),
                     child: RichText(
                         text: TextSpan(
-                            style: MyStyle(
+                            style: const  MyStyle(
                                 fontFamily: Controller.acmeFamily,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w500,
@@ -131,8 +132,8 @@ class AboutApp extends StatelessWidget {
                 height: 10,
               ),
               SizedBox(
-                width: Get.width,
-                child: Text(
+                width: Controller.width,
+                child: const Text(
                   "Qu'est-ce que tu désires ?",
                   style: MyStyle(
                       fontFamily: Controller.acmeFamily,
@@ -143,14 +144,14 @@ class AboutApp extends StatelessWidget {
               ),
               Column(
                 children: List.generate(
-                  Get.put(LoginController()).desires.length,
+                  LoginData.desires.length,
                   (index) => Padding(
                     padding: const EdgeInsets.only(bottom: 5),
                     child: SizedBox(
-                      width: Get.width,
+                      width: Controller.width,
                       child: Text(
-                        Get.put(LoginController()).desires[index],
-                        style: MyStyle(
+                        LoginData.desires[index],
+                        style: const MyStyle(
                             fontFamily: Controller.acmeFamily,
                             color: Controller.blackColor,
                             fontWeight: FontWeight.bold,
@@ -164,8 +165,8 @@ class AboutApp extends StatelessWidget {
                 height: 5,
               ),
               SizedBox(
-                width: Get.width,
-                child: Text(
+                width: Controller.width,
+                child: const Text(
                   "Évidemment que c'est possible ! Cette application, te permettra de :",
                   style: MyStyle(
                       fontFamily: Controller.acmeFamily,
@@ -176,14 +177,14 @@ class AboutApp extends StatelessWidget {
               ),
               Column(
                 children: List.generate(
-                    Get.put(LoginController()).capabilities.length,
+                    LoginData.capabilities.length,
                     (index) => Padding(
                           padding: const EdgeInsets.only(bottom: 5),
                           child: SizedBox(
-                            width: Get.width,
+                            width: Controller.width,
                             child: Text(
-                              Get.put(LoginController()).capabilities[index],
-                              style: MyStyle(
+                              LoginData.capabilities[index],
+                              style: const MyStyle(
                                   fontFamily: Controller.acmeFamily,
                                   color: Controller.blackColor,
                                   fontWeight: FontWeight.bold,
@@ -196,15 +197,15 @@ class AboutApp extends StatelessWidget {
                 height: 5,
               ),
               SizedBox(
-                width: Get.width,
+                width: Controller.width,
                 child: RichText(
-                    text: TextSpan(
+                    text: const TextSpan(
                         style: MyStyle(
                             fontFamily: Controller.acmeFamily,
                             color: Controller.blackColor,
                             fontWeight: FontWeight.w500,
                             fontSize: 15),
-                        children: const [
+                        children: [
                       TextSpan(
                         text:
                             "Cette application te donne toutes les clés pour devenir un parieur gagnant. ",
@@ -223,7 +224,7 @@ class AboutApp extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 "Offre spécial !",
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -238,7 +239,7 @@ class AboutApp extends StatelessWidget {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(Get.put(LoginController()).contactIcons.length, (index) => Padding(
+                children: List.generate(LoginData.contactIcons.length, (index) => Padding(
                 padding: const EdgeInsets.all(5),
                 child: CircleAvatar(
                   radius: 20,
@@ -248,7 +249,7 @@ class AboutApp extends StatelessWidget {
                       Get.put(LoginController()).launchUrl(index: index);
                     }, 
                     iconSize: 17,
-                    icon: Get.put(LoginController()).contactIcons[index],
+                    icon: LoginData.contactIcons[index],
                   ),
                 ),
               )),
@@ -279,7 +280,7 @@ class AboutApp extends StatelessWidget {
     style: MyStyle(fontFamily: Controller.acmeFamily, color: Colors.grey.shade800, fontWeight: FontWeight.w400, fontSize: 18),
   ),
   SizedBox(
-  width: Get.width,
+  width: Controller.width,
     child: Text(
       "commencer à gagner dès aujourd'hui !",
       textAlign: TextAlign.left,
@@ -290,7 +291,7 @@ class AboutApp extends StatelessWidget {
     height: Get.height / 25,
   ),
   Container(
-    width: Get.width,
+    width: Controller.width,
     height: Get.height / 4,
     margin: EdgeInsets.only(bottom: Get.height / 60),
     color: Colors.teal,

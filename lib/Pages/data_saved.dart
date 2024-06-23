@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:projet0_strat/Data/route_named.dart';
 import 'package:projet0_strat/Models/matches_model.dart';
 import 'package:projet0_strat/Controllers/controller.dart';
 import 'package:projet0_strat/Data/db_sql_project.dart';
@@ -21,7 +23,7 @@ class _StorageState extends State<Storage> {
     _matchesData = await databaseHelper.getMatches();
   }
   DatabaseHelper databaseHelper = DatabaseHelper();
-  void goToMatchDetails(Duel duel) {
+  void goToMatchDetail(Duel duel) {
     Get.to(
       () => MatchDetails(match: duel),
       curve: Curves.decelerate,
@@ -136,7 +138,7 @@ class _StorageState extends State<Storage> {
                           ],
                         ),
                         onTap: () {
-                          goToMatchDetails(_matchesData[index]);
+                          context.goNamed(RoutesNamed.matchDetails, extra: _matchesData[index]);
                         },
                       ),
                     ),
