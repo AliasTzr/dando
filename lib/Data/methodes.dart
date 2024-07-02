@@ -1,9 +1,8 @@
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:math_expressions/math_expressions.dart';
 import 'package:flutter/material.dart';
 import 'package:projet0_strat/Components/my_text_style.dart';
-import 'package:projet0_strat/Controllers/controller.dart';
+import 'package:projet0_strat/Data/controller.dart';
 
 
 String calculate(String score1, String score2){
@@ -35,28 +34,37 @@ String convertListToString({required List scoresList}){
   return score.replaceFirst(" ", '', score.lastIndexOf(" "));
 }
 
-void snackResult(String message, {bool success = true, bool bottomPosition = true}) {
-  Get.snackbar(
-      "", "",
-      titleText: SizedBox(
-        width: Get.width,
-        child: Text(
-          success ? "Opération réussie" : "Attention !!!",
-          textAlign: TextAlign.center,
-          style: MyStyle(fontFamily: Controller.oswaldFamily, color: success ? Controller.blackColor : Controller.redColor, fontWeight: FontWeight.bold, fontSize: 18, letterSpacing: 2),
-        ),
+void snackResult(String message, BuildContext context, {bool success = true, bool bottomPosition = true}) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: Text(
+              success ? "Opération réussie" : "Attention !!!",
+              textAlign: TextAlign.center,
+              style: MyStyle(fontFamily: Controller.oswaldFamily, color: success ? Controller.blackColor : Controller.redColor, fontWeight: FontWeight.bold, fontSize: 18, letterSpacing: 2),
+            ),
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: Text(
+              message,
+              textAlign: TextAlign.center,
+              style: const MyStyle(fontFamily: Controller.poppinsFamily, color: Controller.blackColor, fontWeight: FontWeight.w600, fontSize: 14),
+            ),
+          )
+        ],
       ),
-      messageText: SizedBox(
-        width: Get.width,
-        child: Text(
-          message,
-          textAlign: TextAlign.center,
-          style: const MyStyle(fontFamily: Controller.poppinsFamily, color: Controller.blackColor, fontWeight: FontWeight.w600, fontSize: 14),
-        ),
-      ),
-      backgroundColor:success ? Colors.tealAccent.shade400 : Controller.greyColor,
-      snackPosition: bottomPosition ? SnackPosition.BOTTOM : SnackPosition.TOP,
-      duration: const Duration(seconds: 5),
+      backgroundColor: success ? Colors.tealAccent.shade400 : Controller.greyColor,
+      duration: const Duration(seconds: 3),
+      behavior: SnackBarBehavior.floating,
+      padding: const EdgeInsets.all(5),
+      
+    )
   );
 }
 
@@ -78,9 +86,9 @@ String formatTime(TimeOfDay time) {
   String formattedTime = DateFormat('HH:mm').format(dateTime);
   return formattedTime;
 }
-Widget formField(TextEditingController controllerP, String hint, bool isForUpdating){
+Widget formField(TextEditingController controllerP, String hint, bool isForUpdating, double width){
   return Container(
-    width: Get.width * 3.3/5,
+    width: width * 3.3/5,
     decoration: BoxDecoration(
       color: Colors.grey.shade300,
       borderRadius: BorderRadius.circular(10.0),
@@ -98,4 +106,9 @@ Widget formField(TextEditingController controllerP, String hint, bool isForUpdat
       ),
     ),
   );
+}
+
+bool isNumeric(String str) {
+  final numericRegex = RegExp(r'^-?[0-9]+$');
+  return numericRegex.hasMatch(str);
 }

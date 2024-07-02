@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projet0_strat/Components/table_header_component.dart';
 import 'package:projet0_strat/Components/table_row_component.dart';
-import 'package:projet0_strat/Controllers/controller.dart';
-
-import '../Data/methodes.dart';
+import 'package:projet0_strat/Data/methodes.dart';
 
 class MinMaxCalculator extends StatefulWidget {
   final List<String> scoresA, scoresB;
@@ -32,9 +30,9 @@ class _MinMaxCalculatorState extends State<MinMaxCalculator> {
       children: [
         TableRow(
             children: [
-              SizedBox(height: Controller.height / 27,),
-              TableHeaderComponent(textValue: "Score min", positionTop: true),
-              TableHeaderComponent(textValue:  "Score max", positionTop: true)
+              SizedBox(height: MediaQuery.of(context).size.height / 27,),
+              const TableHeaderComponent(textValue: "Score min", positionTop: true),
+              const TableHeaderComponent(textValue:  "Score max", positionTop: true)
             ]
         ),
         TableRow(
@@ -53,7 +51,7 @@ class _MinMaxCalculatorState extends State<MinMaxCalculator> {
         ),
         TableRow(
             children: [
-              TableHeaderComponent(textValue: "Total", positionTop: false),
+              const TableHeaderComponent(textValue: "Total", positionTop: false),
               TableRowComponent(textValue: calculate(_minTeamA, _minTeamB), isSynthesis: true),
               TableRowComponent(textValue: calculate(_maxTeamA, _maxTeamB), isSynthesis: true)
             ]

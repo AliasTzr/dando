@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class LoginData {
+  static const String price = "12 990f cfa";
+  final _phoneNumber = "2250173871065";
   static final List<String> titles = [
     "Grosse occasion ",
     "pour profiter des gains sans fin !\n\nGagner jusqu'à ",
@@ -71,4 +74,25 @@ class LoginData {
     //   color: Colors.black,
     // )
   ];
+
+  Future<void> launchUrl({int? index}) async {
+    String url = 'https://wa.me/$_phoneNumber';
+    if (index == 1) {
+      url = 'https://t.me/+$_phoneNumber';
+    }
+    // if (index == 2) {
+    //   url = "https://www.youtube.com/@BighID_RTaZed";
+    // }
+    // if (index == 5) {
+    //   url = "https://www.tiktok.com/@byggy31";
+    // }
+    try {
+      if (await canLaunchUrlString(url)) {
+        await launchUrlString(url);
+      }
+    // ignore: empty_catches
+    } catch (e) {
+      
+    }
+  }
 }

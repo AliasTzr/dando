@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projet0_strat/Components/my_text_style.dart';
-import 'package:projet0_strat/Controllers/controller.dart';
+import 'package:projet0_strat/Data/controller.dart';
 
 class ButtonHeader extends StatelessWidget {
   final String title;

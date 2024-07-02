@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:math_expressions/math_expressions.dart';
-import 'package:projet0_strat/Controllers/controller.dart';
+import 'package:projet0_strat/Data/controller.dart';
 import 'package:projet0_strat/Components/min_max_calculator.dart';
 import 'package:projet0_strat/Data/methodes.dart';
 import 'package:projet0_strat/Components/my_text_style.dart';
@@ -20,7 +19,6 @@ class _HomeState extends State<Home> {
   List<String> scoresTeamA = List.filled(5, "");
   List<String> scoresTeamB = List.filled(5, "");
   String minScoreA = "", minScoreB = "", maxScoreA = "", maxScoreB = "", scoresTeamAForDatabase = "", scoresTeamBForDatabase = "";
-  final GlobalKey<_HomeState> myKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -28,22 +26,22 @@ class _HomeState extends State<Home> {
       shrinkWrap: true,
       physics: const ClampingScrollPhysics(),
       children: [
-        SizedBox(height: Controller.height / 26,),
+        SizedBox(height: MediaQuery.of(context).size.height / 26,),
         ScoreShower(scoresTeamA: scoresTeamA, scoresTeamB: scoresTeamB, countMatch: countMatch),
-        SizedBox(height: Controller.height / 20,),
+        SizedBox(height: MediaQuery.of(context).size.height / 20,),
         MinMaxCalculator(scoresA: scoresTeamA, scoresB: scoresTeamB),
-        SizedBox(height: Controller.height / 23,),
+        SizedBox(height: MediaQuery.of(context).size.height / 23,),
         Row(
           children: [
             Container(
-              width: Controller.width * 3 / 4,
-              height: Controller.height / 2.95,
-              padding: EdgeInsets.symmetric(horizontal: Controller.width / 33),
+              width: MediaQuery.of(context).size.width * 3 / 4,
+              height: MediaQuery.of(context).size.height / 2.95,
+              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 33),
               child: Column(
                 children: [
                   SizedBox(
-                    width: Controller.width,
-                    height: Controller.height / 12,
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height / 12,
                     child: Row(
                       children: [
                         InkWell(
@@ -70,59 +68,59 @@ class _HomeState extends State<Home> {
                   ),
                   Row(
                     children: [
-                      calculatorButton(textValue: "1", numberSide: true),
-                      SizedBox(width: Controller.width / 25,),
-                      calculatorButton(textValue: "2", numberSide: true),
-                      SizedBox(width: Controller.width / 25,),
-                      calculatorButton(textValue: "3", numberSide: true),
+                      calculatorButton(textValue: "1", numberSide: true, context),
+                      SizedBox(width: MediaQuery.of(context).size.width / 25,),
+                      calculatorButton(textValue: "2", numberSide: true, context),
+                      SizedBox(width: MediaQuery.of(context).size.width / 25,),
+                      calculatorButton(textValue: "3", numberSide: true, context),
                     ],
                   ),
-                  SizedBox(height: Controller.height / 50,),
+                  SizedBox(height: MediaQuery.of(context).size.height / 50,),
                   Row(
                     children: [
-                      calculatorButton(textValue: "4", numberSide: true),
-                      SizedBox(width: Controller.width / 25,),
-                      calculatorButton(textValue: "5", numberSide: true),
-                      SizedBox(width: Controller.width / 25,),
-                      calculatorButton(textValue: "6", numberSide: true),
+                      calculatorButton(textValue: "4", numberSide: true, context),
+                      SizedBox(width: MediaQuery.of(context).size.width / 25,),
+                      calculatorButton(textValue: "5", numberSide: true, context),
+                      SizedBox(width: MediaQuery.of(context).size.width / 25,),
+                      calculatorButton(textValue: "6", numberSide: true, context),
                     ],
                   ),
-                  SizedBox(height: Controller.height / 50,),
+                  SizedBox(height: MediaQuery.of(context).size.height / 50,),
                   Row(
                     children: [
-                      calculatorButton(textValue: "7", numberSide: true),
-                      SizedBox(width: Controller.width / 25,),
-                      calculatorButton(textValue: "8", numberSide: true),
-                      SizedBox(width: Controller.width / 25,),
-                      calculatorButton(textValue: "9", numberSide: true),
+                      calculatorButton(textValue: "7", numberSide: true, context),
+                      SizedBox(width: MediaQuery.of(context).size.width / 25,),
+                      calculatorButton(textValue: "8", numberSide: true, context),
+                      SizedBox(width: MediaQuery.of(context).size.width / 25,),
+                      calculatorButton(textValue: "9", numberSide: true, context),
                     ],
                   ),
-                  SizedBox(height: Controller.height / 50,),
+                  SizedBox(height: MediaQuery.of(context).size.height / 50,),
                   Row(
                     children: [
-                      calculatorButton(textValue: "0", numberSide: true),
-                      SizedBox(width: Controller.width / 25,),
-                      calculatorButton(textValue: "Match suivant", numberSide: true),
+                      calculatorButton(textValue: "0", numberSide: true, context),
+                      SizedBox(width: MediaQuery.of(context).size.width / 25,),
+                      calculatorButton(textValue: "Match suivant", numberSide: true, context),
                     ],
                   ),
                 ],
               ),
             ),
             Container(
-              width: Controller.width / 4,
-              height: Controller.height / 2.95,
-              padding: EdgeInsets.only(top: Controller.width / 24, right: Controller.width / 33),
+              width: MediaQuery.of(context).size.width / 4,
+              height: MediaQuery.of(context).size.height / 2.95,
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.width / 24, right: MediaQuery.of(context).size.width / 33),
               child: Column(
                 children: [
-                  calculatorButton(textValue: "Supp.", numberSide: false),
-                  SizedBox(height: Controller.height / 52,),
-                  calculatorButton(textValue: "Vider", numberSide: false),
-                  SizedBox(height: Controller.height / 52,),
-                  calculatorButton(textValue: "Sauv.", numberSide: false),
-                  SizedBox(height: Controller.height / 52,),
+                  calculatorButton(textValue: "Supp.", numberSide: false, context),
+                  SizedBox(height: MediaQuery.of(context).size.height / 52,),
+                  calculatorButton(textValue: "Vider", numberSide: false, context),
+                  SizedBox(height: MediaQuery.of(context).size.height / 52,),
+                  calculatorButton(textValue: "Sauv.", numberSide: false, context),
+                  SizedBox(height: MediaQuery.of(context).size.height / 52,),
                   SizedBox(
-                    width: Controller.width / 4,
-                    height: Controller.height * (1 / 11 + 1 / 50),
+                    width: MediaQuery.of(context).size.width / 4,
+                    height: MediaQuery.of(context).size.height * (1 / 11 + 1 / 50),
                     child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor: WidgetStateProperty.all(Controller.tealColor),
@@ -166,9 +164,9 @@ class _HomeState extends State<Home> {
       ],
     );
   }
-  Widget calculatorButton({required String textValue, bool? numberSide}) => SizedBox(
-    width: numberSide! ? textValue == "Match suivant" ? (Controller.width * (1 / 2.475 + 1/25) ) : Controller.width / 4.95 : Controller.width / 4,
-    height: Controller.height / 22,
+  Widget calculatorButton(BuildContext context, {required String textValue, bool? numberSide}) => SizedBox(
+    width: numberSide! ? textValue == "Match suivant" ? (MediaQuery.of(context).size.width * (1 / 2.475 + 1/25) ) : MediaQuery.of(context).size.width / 4.95 : MediaQuery.of(context).size.width / 4,
+    height: MediaQuery.of(context).size.height / 22,
     child: ElevatedButton(
         style: ButtonStyle(
             elevation: WidgetStateProperty.all(numberSide && textValue != "Match suivant"  ? 5 : 2),
@@ -176,12 +174,10 @@ class _HomeState extends State<Home> {
             shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
         ),
         onPressed: () async {
-          int scoreAAsInt = 0;
           String formattedScoreA = "";
-          int scoreBAsInt = 0;
           String formattedScoreB = "";
           setState(() {
-            if(textValue.isNum){
+            if(isNumeric(textValue)){
               if(caseASelected){
                 scoreA += textValue;
               }else{
@@ -207,10 +203,8 @@ class _HomeState extends State<Home> {
               scoresTeamAForDatabase = '';
             }
             else if(textValue == "Match suivant" && countMatch < 5 && scoreA.isNotEmpty && scoreB.isNotEmpty){
-              scoreAAsInt = int.parse(scoreA);
-              formattedScoreA = scoreAAsInt.toString();
-              scoreBAsInt = int.parse(scoreB);
-              formattedScoreB = scoreBAsInt.toString();
+              formattedScoreA = int.parse(scoreA).toString();
+              formattedScoreB = int.parse(scoreB).toString();
               scoresTeamA[countMatch] = formattedScoreA;
               scoresTeamB[countMatch] = formattedScoreB;
               scoresTeamAForDatabase = convertListToString(scoresList: scoresTeamA);
@@ -229,17 +223,19 @@ class _HomeState extends State<Home> {
             }
           });
           if(textValue == "Sauv.") {
-            if(scoresTeamA[3].isNotEmpty){
-              bool? saveSuccess = await showDialog(
-                context: myKey.currentContext!,
-                builder: (_) => PreSaveData(scoresTeamA: scoresTeamAForDatabase, scoresTeamB: scoresTeamBForDatabase,),
-                barrierDismissible: false,
-              );
-              if(saveSuccess != null && saveSuccess && myKey.currentContext!.mounted){
-                snackResult("Sauvegarde réussi.", success: true);
+            if (context.mounted) {
+              if(scoresTeamA[3].isNotEmpty){
+                bool? saveSuccess = await showDialog(
+                  context: context,
+                  builder: (_) => PreSaveData(scoresTeamA: scoresTeamAForDatabase, scoresTeamB: scoresTeamBForDatabase,),
+                  barrierDismissible: false,
+                );
+                if(saveSuccess != null && saveSuccess && context.mounted){
+                  snackResult("Sauvegarde réussi.", context, success: true);
+                }
+              } else {
+                snackResult("Sauvegarde possible à partir de 4 matchs", context, success: false);
               }
-            } else {
-              snackResult("Sauvegarde possible à partir de 4 matchs", success: false);
             }
           }
         },
@@ -256,8 +252,8 @@ class _HomeState extends State<Home> {
   Widget textFieldSelector({required String score, required String placeHolderValue, required bool caseSelected}) => AnimatedContainer(
     duration: const Duration(milliseconds: 500),
     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-    width: Controller.width / 3,
-    height: Controller.height / 17,
+    width: MediaQuery.of(context).size.width / 3,
+    height: MediaQuery.of(context).size.height / 17,
     decoration: BoxDecoration(
       color: caseSelected ? Colors.teal : Colors.black12,
       borderRadius: BorderRadius.circular(5.0),

@@ -4,7 +4,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_router/go_router.dart';
 import 'package:projet0_strat/Components/date_component.dart';
 import 'package:projet0_strat/Components/dropdown_child.dart';
-import 'package:projet0_strat/Controllers/controller.dart';
+import 'package:projet0_strat/Data/controller.dart';
 import 'package:projet0_strat/Data/db_sql_project.dart';
 import 'package:projet0_strat/Data/methodes.dart';
 import 'package:projet0_strat/Components/my_text_style.dart';
@@ -29,7 +29,6 @@ class _PreSaveDataState extends State<PreSaveData> {
   final TextEditingController _nameTeamA = TextEditingController();
   final TextEditingController _nameTeamB = TextEditingController();
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  final GlobalKey<_PreSaveDataState> myKey = GlobalKey();
 
   void refreshDate(DateTime? getDateTime, String getDate) {
     setState(() {
@@ -110,7 +109,7 @@ class _PreSaveDataState extends State<PreSaveData> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(horizontal: Controller.width/20),
+      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/20),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.only(bottom: 10),
@@ -133,11 +132,11 @@ class _PreSaveDataState extends State<PreSaveData> {
                 ),
                 const SizedBox(height: 10,),
                 SizedBox(
-                  width: Controller.width * 3/5,
+                  width: MediaQuery.of(context).size.width * 3/5,
                   child: DropdownButton(
                     value: dropdownValue,
                     isExpanded: true,
-                    menuMaxHeight: Controller.height / 3.5,
+                    menuMaxHeight: MediaQuery.of(context).size.height / 3.5,
                     underline: Container(color: Controller.tealColor, height: 2,),
                     onChanged: (String? newValue){
                       setState(() {
@@ -188,24 +187,23 @@ class _PreSaveDataState extends State<PreSaveData> {
                     ],
                   ),
                 ),
-                formField(_championship, "Nom du championnat", false),
+                formField(_championship, "Nom du championnat", false, MediaQuery.of(context).size.width),
                 const SizedBox(height: 5,),
-                formField(_nameTeamA, "Nom de l'équipe A", false),
+                formField(_nameTeamA, "Nom de l'équipe A", false, MediaQuery.of(context).size.width),
                 const SizedBox(height: 5,),
-                formField(_nameTeamB, "Nom de l'équipe B", false),
+                formField(_nameTeamB, "Nom de l'équipe B", false, MediaQuery.of(context).size.width),
                 const SizedBox(height: 5,),
                 DateComponent(dateTime: _dateTime, timeOfDay: _timeOfDay, canSendNotification: _canSendNotification, date: _date, time: _time, getDateFunction: refreshDate, getTimeFunction: refreshTime,),
                 const SizedBox(height: 15,),
                 SizedBox(
-                  width: Controller.width * 3.8/5,
-                  height: Controller.height * 0.06,
+                  width: MediaQuery.of(context).size.width * 3.8/5,
+                  height: MediaQuery.of(context).size.height * 0.06,
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: WidgetStateProperty.all(Colors.teal),
                       shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
                     ),
                     onPressed: () async {
-                      final context = myKey.currentContext;
                       if (_dateTime != null && _timeOfDay != null) {
                         int id = 0;
                         if(_championship.text.isNotEmpty && _nameTeamA.text.isNotEmpty && _nameTeamB.text.isNotEmpty && _date.isNotEmpty && _time.isNotEmpty){
@@ -214,16 +212,14 @@ class _PreSaveDataState extends State<PreSaveData> {
                             DateTime dateTime = DateTime(_dateTime!.year, _dateTime!.month, _dateTime!.day, _timeOfDay!.hour, _timeOfDay!.minute);
                             await NotificationService.scheduleNotification(title: "${_nameTeamA.text} - ${_nameTeamB.text}", payload: id.toString(), dateTime: dateTime);
                           } else {
-                            snackResult("Vous ne serez pas notifié pour cet évènement !\nAutoriser les notifications ou changer l'heure puis réessayer !");
+                            if(context.mounted) snackResult("Vous ne serez pas notifié pour cet évènement !\nAutoriser les notifications ou changer l'heure puis réessayer !",context);
                           }
-                          if (context != null && context.mounted) {
-                            context.pop(true);
-                          }
+                          if(context.mounted) context.pop(true);
                         } else {
-                          snackResult("Tous les champs sont réquis !", success: false);
+                          snackResult("Tous les champs sont réquis !", context, success: false);
                         }
                       } else {
-                        snackResult("La date et l'heure sont réquisent !", success: false);
+                        snackResult("La date et l'heure sont réquisent !", context, success: false);
                       }
                     },
                     child: const Text(

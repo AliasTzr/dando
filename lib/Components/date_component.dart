@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:projet0_strat/Components/my_text_style.dart';
-import 'package:projet0_strat/Controllers/controller.dart';
+import 'package:projet0_strat/Data/controller.dart';
 import 'package:projet0_strat/Data/methodes.dart';
 
 // ignore: must_be_immutable
@@ -22,13 +21,13 @@ class _DateComponentState extends State<DateComponent> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: Get.width,
+      width: MediaQuery.of(context).size.width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            width: Controller.width * 4/10,
-            height: Controller.height * 0.06,
+            width: MediaQuery.of(context).size.width * 4/10,
+            height: MediaQuery.of(context).size.height * 0.06,
             child: ElevatedButton(
               style: ButtonStyle(
                 backgroundColor: WidgetStateProperty.all(Colors.teal),
@@ -53,7 +52,7 @@ class _DateComponentState extends State<DateComponent> {
                       widget.date = "";
                     });
                     widget.getDateFunction(widget.dateTime, widget.date);
-                    snackResult("Cette date est passée !", success: false, bottomPosition: false);
+                    if(context.mounted) snackResult("Cette date est passée !", context, success: false, bottomPosition: false);
                   }
                 }
               },
@@ -65,10 +64,10 @@ class _DateComponentState extends State<DateComponent> {
               ),
             ),
           ),
-          SizedBox(width: Controller.width * 0.02,),
+          SizedBox(width: MediaQuery.of(context).size.width * 0.02,),
           SizedBox(
-            width: Controller.width * 2.2/10,
-            height: Controller.height * 0.06,
+            width: MediaQuery.of(context).size.width * 2.2/10,
+            height: MediaQuery.of(context).size.height * 0.06,
             child: ElevatedButton(
               style: ButtonStyle(
                 backgroundColor: WidgetStateProperty.all(Colors.teal),
@@ -84,7 +83,7 @@ class _DateComponentState extends State<DateComponent> {
                   if (widget.timeOfDay!.hour >= DateTime.now().hour) {
                     if (widget.timeOfDay!.hour == DateTime.now().hour && DateTime.now().minute >= widget.timeOfDay!.minute) {
                       widget.canSendNotification = false;
-                      snackResult("Minute déjà écoulée !\nModifier afin de recevoir une notification.", success: false, bottomPosition: false);
+                      if(context.mounted) snackResult("Minute déjà écoulée !\nModifier afin de recevoir une notification.", context, success: false, bottomPosition: false);
                     }
                     setState(() {
                       widget.time = formatTime(widget.timeOfDay!);
@@ -96,7 +95,7 @@ class _DateComponentState extends State<DateComponent> {
                       widget.time = "";
                     });
                     widget.getDateFunction(widget.dateTime, widget.date);
-                    snackResult("Cette heure est déjà passée !", success: false, bottomPosition: false);
+                    if(context.mounted) snackResult("Cette heure est déjà passée !", context, success: false, bottomPosition: false);
                   }
                 }
               },

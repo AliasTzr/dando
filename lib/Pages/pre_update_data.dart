@@ -1,10 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:projet0_strat/Components/date_component.dart';
-import 'package:projet0_strat/Controllers/controller.dart';
+import 'package:projet0_strat/Data/controller.dart';
 import 'package:projet0_strat/Models/matches_model.dart';
 import 'package:projet0_strat/Data/db_sql_project.dart';
 import 'package:projet0_strat/Data/methodes.dart';
@@ -22,7 +21,6 @@ class _PreUpdateDataState extends State<PreUpdateData> {
   DatabaseHelper databaseHelper = DatabaseHelper();
   final TextEditingController _newScoreTeamA = TextEditingController();
   final TextEditingController _newScoreTeamB = TextEditingController();
-  final GlobalKey<_PreUpdateDataState> myKey = GlobalKey();
   String _newTime = "", _newDate = "";
   DateTime? _dateTime;
   TimeOfDay? _timeOfDay;
@@ -104,7 +102,7 @@ class _PreUpdateDataState extends State<PreUpdateData> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(horizontal: Controller.width/20),
+      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/20),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.only(bottom: 10),
@@ -115,7 +113,7 @@ class _PreUpdateDataState extends State<PreUpdateData> {
                   alignment: Alignment.topRight,
                   child: IconButton(
                     onPressed: (){
-                      Get.back();
+                      context.pop();
                     },
                     splashRadius: 20,
                     icon: const Icon(Icons.cancel, color: Colors.grey,)
@@ -126,9 +124,9 @@ class _PreUpdateDataState extends State<PreUpdateData> {
                   style: MyStyle(fontFamily: 'roboto', color: Controller.tealColor, fontWeight: FontWeight.w700, fontSize: 15),
                 ),
                 const SizedBox(height: 5,),
-                formField(_newScoreTeamA, "Nouveau score (${widget.match.nameTeamA})", true),
+                formField(_newScoreTeamA, "Nouveau score (${widget.match.nameTeamA})", true, MediaQuery.of(context).size.width),
                 const SizedBox(height: 5,),
-                formField(_newScoreTeamB, "Nouveau score (${widget.match.nameTeamB})", true),
+                formField(_newScoreTeamB, "Nouveau score (${widget.match.nameTeamB})", true, MediaQuery.of(context).size.width),
                 const SizedBox(height: 15,),
                 const Text(
                   "Jour et heure du prochain match",
@@ -138,16 +136,15 @@ class _PreUpdateDataState extends State<PreUpdateData> {
                 DateComponent(dateTime: _dateTime, timeOfDay: _timeOfDay, canSendNotification: _canSendNotification, date: _newDate, time: _newTime, getDateFunction: refreshDate, getTimeFunction: refreshTime),
                 const SizedBox(height: 15,),
                 SizedBox(
-                  width: Controller.width * 3.8/5,
-                  height: Controller.height * 0.06,
+                  width: MediaQuery.of(context).size.width * 3.8/5,
+                  height: MediaQuery.of(context).size.height * 0.06,
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: WidgetStateProperty.all(Controller.tealColor),
                       shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
                     ),
                     onPressed: () async {
-                      final context = myKey.currentContext;
-                      if (_newScoreTeamA.text.isNumericOnly && _newScoreTeamB.text.isNumericOnly) {
+                      if (isNumeric(_newScoreTeamA.text) && isNumeric(_newScoreTeamB.text)) {
                         String newScoreA = insertNewScore(widget.match.scoresTeamA, int.parse(_newScoreTeamA.text).toString());
                         String newScoreB = insertNewScore(widget.match.scoresTeamB, int.parse(_newScoreTeamB.text).toString());
                         if(_newDate.isNotEmpty && _newTime.isNotEmpty){
@@ -156,15 +153,12 @@ class _PreUpdateDataState extends State<PreUpdateData> {
                             DateTime dateTime = DateTime(_dateTime!.year, _dateTime!.month, _dateTime!.day, _timeOfDay!.hour, _timeOfDay!.minute);
                             await NotificationService.scheduleNotification(title: "${widget.match.nameTeamA} - ${widget.match.nameTeamB}", payload: widget.match.id.toString(), dateTime: dateTime);
                           } else {
-                            snackResult("Vous ne serez pas notifié pour cet évènement !\nAutoriser les notifications ou changer l'heure puis réessayer !");
+                            if(context.mounted) snackResult("Vous ne serez pas notifié pour cet évènement !\nAutoriser les notifications ou changer l'heure puis réessayer !", context);
                           }
-                          if (context != null && context.mounted) {
-                            context.pop(true);
-                          }
-
+                          if(context.mounted) context.pop(true);
                         }
                       } else {
-                        snackResult('type de score non pris en charge', success: false, );
+                        snackResult('type de score non pris en charge', context, success: false, );
                       }
                     },
                     child: const Text(

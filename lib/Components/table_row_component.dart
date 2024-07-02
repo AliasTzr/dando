@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:projet0_strat/Controllers/controller.dart';
 import 'package:projet0_strat/Components/my_text_style.dart';
 
 class TableRowComponent extends StatelessWidget {
@@ -11,8 +10,8 @@ class TableRowComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(microseconds: 500),
-      height: Controller.height / 18,
-      width: isSynthesis ? Controller.width * 2/5 : Controller.width * 4/25,
+      height: MediaQuery.of(context).size.height / 18,
+      width: isSynthesis ? MediaQuery.of(context).size.width * 2/5 : MediaQuery.of(context).size.width * 4/25,
       color: countMatch == column && column != null ? Colors.teal.shade300 : Colors.white,
       child: FittedBox(
         fit: BoxFit.scaleDown,

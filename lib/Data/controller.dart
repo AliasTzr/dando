@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class Controller extends GetxController {
-  static final double height = Get.height;
-  static final double width = Get.width;
+class Controller {
   static const Color tealColor = Colors.teal;
   static const Color blackColor = Colors.black;
   static const Color whiteColor = Colors.white;

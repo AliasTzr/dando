@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:projet0_strat/Components/my_text_style.dart';
 
 
@@ -11,7 +10,7 @@ class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: Get.width * 0.85,
+        width: MediaQuery.of(context).size.width * 0.85,
         decoration: BoxDecoration(
           color: Colors.grey.shade300,
           borderRadius: BorderRadius.circular(10),

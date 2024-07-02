@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:projet0_strat/Components/my_text_style.dart';
-import 'package:projet0_strat/Controllers/controller.dart';
-import 'package:projet0_strat/Controllers/login_controller.dart';
+import 'package:projet0_strat/Data/controller.dart';
+import 'package:projet0_strat/Data/login_data.dart';
 
 class ClickToBuy extends StatelessWidget {
   const ClickToBuy({super.key});
@@ -11,18 +10,18 @@ class ClickToBuy extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(10),
+        const Padding(
+          padding: EdgeInsets.all(10),
           child: Text(
-            "${Get.put(LoginController()).price} au lieu de 99 000f fcfa pour accéder à toutes les fonctionnalités de l'application.",
+            "${LoginData.price} au lieu de 99 000f fcfa pour accéder à toutes les fonctionnalités de l'application.",
             textAlign: TextAlign.center,
-            style: const MyStyle(fontFamily: Controller.acmeFamily, color: Colors.black, fontWeight: FontWeight.w600, fontSize: 15),
+            style: MyStyle(fontFamily: Controller.acmeFamily, color: Colors.black, fontWeight: FontWeight.w600, fontSize: 15),
           ),
         ),
         SizedBox(
-          width: Get.width - 15,
+          width: MediaQuery.of(context).size.width - 15,
           child: MaterialButton(
-            onPressed: Get.put(LoginController()).launchUrl, 
+            onPressed: LoginData().launchUrl, 
             color: Controller.tealColor,
             padding: const EdgeInsets.symmetric(vertical: 15),
             child: const Text(

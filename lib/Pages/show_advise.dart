@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:projet0_strat/Controllers/controller.dart';
+import 'package:go_router/go_router.dart';
+import 'package:projet0_strat/Data/controller.dart';
 import 'package:projet0_strat/Models/advises_model.dart';
 
 class AdviseDetails extends StatelessWidget {
@@ -25,15 +25,15 @@ class AdviseDetails extends StatelessWidget {
             automaticallyImplyLeading: false,
             leading: IconButton(
                 onPressed: (){
-                  Get.back();
+                  context.pop();
                 },
                 iconSize: 16,
                 icon: const Icon(Icons.arrow_back_ios, color: Controller.tealColor,)
             ),
           ),
           body: Container(
-            height: Controller.height,
-            width: Controller.width,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
             color: Colors.white,
             alignment: Alignment.center,
             child: Image.asset(

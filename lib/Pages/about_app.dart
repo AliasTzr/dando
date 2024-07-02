@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:projet0_strat/Components/click_to_buy_component.dart';
 import 'package:projet0_strat/Components/my_text_style.dart';
-import 'package:projet0_strat/Controllers/controller.dart';
-import 'package:projet0_strat/Controllers/login_controller.dart';
+import 'package:projet0_strat/Data/controller.dart';
 import 'package:projet0_strat/Data/login_data.dart';
 
 // ignore: must_be_immutable
@@ -25,8 +23,8 @@ class AboutApp extends StatelessWidget {
           automaticallyImplyLeading: true,
         ),
         body: Container(
-          width: Controller.width,
-          height: Get.height,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
           color: Colors.transparent,
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 3),
             child: ListView(physics: const ClampingScrollPhysics(), children: [
@@ -50,7 +48,7 @@ class AboutApp extends StatelessWidget {
                 height: 10,
               ),
               SizedBox(
-                width: Controller.width,
+                width: MediaQuery.of(context).size.width,
                 child: const Text(
                   "Quelle est ta situation ?",
                   style: MyStyle(
@@ -66,7 +64,7 @@ class AboutApp extends StatelessWidget {
                   (index) => Padding(
                     padding: const EdgeInsets.only(bottom: 5),
                     child: SizedBox(
-                      width: Controller.width,
+                      width: MediaQuery.of(context).size.width,
                       child: Text(
                         LoginData.problems[index],
                         style: const MyStyle(
@@ -83,7 +81,7 @@ class AboutApp extends StatelessWidget {
                 height: 5,
               ),
               SizedBox(
-                width: Controller.width,
+                width: MediaQuery.of(context).size.width,
                 child: const Text(
                   "Si oui, alors cette application est faites pour toi.",
                   style: MyStyle(
@@ -97,24 +95,24 @@ class AboutApp extends StatelessWidget {
                 margin: const EdgeInsets.all(5),
                 elevation: 10,
                 child: InkWell(
-                  onTap: Get.put(LoginController()).launchUrl,
+                  onTap: LoginData().launchUrl,
                   child: Container(
-                    width: Controller.width,
+                    width: MediaQuery.of(context).size.width,
                     padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: Controller.orangeColor,
                     ),
                     child: RichText(
-                        text: TextSpan(
-                            style: const  MyStyle(
+                        text: const TextSpan(
+                            style:  MyStyle(
                                 fontFamily: Controller.acmeFamily,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 15
                               ),
                             children: [
-                          const TextSpan(
+                          TextSpan(
                               text: "Clique ici",
                               style: TextStyle(
                                   decoration: TextDecoration.underline,
@@ -122,8 +120,7 @@ class AboutApp extends StatelessWidget {
                                   fontSize: 19)
                           ),
                           TextSpan(
-                              text:
-                                  ", obtiens ton code d'accès et change ta vie pour ${Get.put(LoginController()).price} seulement au lieu de 99 000f cfa.")
+                              text: ", obtiens ton code d'accès et change ta vie pour ${LoginData.price} seulement au lieu de 99 000f cfa.")
                         ])),
                   ),
                 ),
@@ -132,7 +129,7 @@ class AboutApp extends StatelessWidget {
                 height: 10,
               ),
               SizedBox(
-                width: Controller.width,
+                width: MediaQuery.of(context).size.width,
                 child: const Text(
                   "Qu'est-ce que tu désires ?",
                   style: MyStyle(
@@ -148,7 +145,7 @@ class AboutApp extends StatelessWidget {
                   (index) => Padding(
                     padding: const EdgeInsets.only(bottom: 5),
                     child: SizedBox(
-                      width: Controller.width,
+                      width: MediaQuery.of(context).size.width,
                       child: Text(
                         LoginData.desires[index],
                         style: const MyStyle(
@@ -165,7 +162,7 @@ class AboutApp extends StatelessWidget {
                 height: 5,
               ),
               SizedBox(
-                width: Controller.width,
+                width: MediaQuery.of(context).size.width,
                 child: const Text(
                   "Évidemment que c'est possible ! Cette application, te permettra de :",
                   style: MyStyle(
@@ -181,7 +178,7 @@ class AboutApp extends StatelessWidget {
                     (index) => Padding(
                           padding: const EdgeInsets.only(bottom: 5),
                           child: SizedBox(
-                            width: Controller.width,
+                            width: MediaQuery.of(context).size.width,
                             child: Text(
                               LoginData.capabilities[index],
                               style: const MyStyle(
@@ -197,7 +194,7 @@ class AboutApp extends StatelessWidget {
                 height: 5,
               ),
               SizedBox(
-                width: Controller.width,
+                width: MediaQuery.of(context).size.width,
                 child: RichText(
                     text: const TextSpan(
                         style: MyStyle(
@@ -243,10 +240,10 @@ class AboutApp extends StatelessWidget {
                 padding: const EdgeInsets.all(5),
                 child: CircleAvatar(
                   radius: 20,
-                  backgroundColor: Colors.grey.shade300,  
+                  backgroundColor: Colors.grey.shade300,
                   child: IconButton(
                     onPressed: (){
-                      Get.put(LoginController()).launchUrl(index: index);
+                      LoginData().launchUrl(index: index);
                     }, 
                     iconSize: 17,
                     icon: LoginData.contactIcons[index],
@@ -274,13 +271,13 @@ class AboutApp extends StatelessWidget {
     "Intégrez notre communauté de parieurs gagnants et boostez vos gains !",
     style: MyStyle(fontFamily: Controller.acmeFamily, color: Colors.black87, fontWeight: FontWeight.w900, fontSize: 20),
   ),
-  SizedBox(height: Get.height / 50,),
+  SizedBox(height: MediaQuery.of(context).size.height / 50,),
   Text(
     "Avec notre aide et notre interface intuitive,\ndevenez un expert en paris en sportif et",
     style: MyStyle(fontFamily: Controller.acmeFamily, color: Colors.grey.shade800, fontWeight: FontWeight.w400, fontSize: 18),
   ),
   SizedBox(
-  width: Controller.width,
+  width: MediaQuery.of(context).size.width,
     child: Text(
       "commencer à gagner dès aujourd'hui !",
       textAlign: TextAlign.left,
@@ -288,12 +285,12 @@ class AboutApp extends StatelessWidget {
     ),
   ),
   SizedBox(
-    height: Get.height / 25,
+    height: MediaQuery.of(context).size.height / 25,
   ),
   Container(
-    width: Controller.width,
-    height: Get.height / 4,
-    margin: EdgeInsets.only(bottom: Get.height / 60),
+    width: MediaQuery.of(context).size.width,
+    height: MediaQuery.of(context).size.height / 4,
+    margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 60),
     color: Colors.teal,
     child: const Text("Témoignages"),
   ),

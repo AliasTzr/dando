@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:projet0_strat/Controllers/controller.dart';
 import 'package:projet0_strat/Data/methodes.dart';
 import 'package:projet0_strat/Components/table_header_component.dart';
 import 'package:projet0_strat/Components/table_row_component.dart';
@@ -19,7 +18,7 @@ class ScoreShower extends StatelessWidget {
           bottom: BorderSide()
       ),
       columnWidths: <int, TableColumnWidth>{
-        0: FixedColumnWidth(Controller.width / 5),
+        0: FixedColumnWidth(MediaQuery.of(context).size.width / 5),
       },
       children: [
         TableRow(

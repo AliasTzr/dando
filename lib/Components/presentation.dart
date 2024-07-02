@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:projet0_strat/Components/caroussel_container.dart';
 import 'package:projet0_strat/Data/login_data.dart';
 
@@ -13,8 +12,8 @@ class Presentation extends StatelessWidget {
       items: [0, 1, 2, 3, 4, 5].map((i) => Builder(
         builder: (BuildContext context) {
           return Container(
-            width: Get.width,
-            height: Get.height / 8,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height / 8,
             alignment: Alignment.center,
             padding: const EdgeInsets.symmetric(horizontal: 2),
             decoration: BoxDecoration(
@@ -25,8 +24,8 @@ class Presentation extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  width: Get.width / 3.8,
-                  height: Get.height / 8,
+                  width: MediaQuery.of(context).size.width / 3.8,
+                  height: MediaQuery.of(context).size.height / 8,
                   decoration: const BoxDecoration(
                     color: Colors.transparent,
                     shape: BoxShape.circle
@@ -47,7 +46,7 @@ class Presentation extends StatelessWidget {
         }
       )).toList(),
       options: CarouselOptions(
-        height: Get.height / 8,
+        height: MediaQuery.of(context).size.height / 8,
         viewportFraction: 1,
         autoPlay: true,
         scrollPhysics: const ClampingScrollPhysics(),

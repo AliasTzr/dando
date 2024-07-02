@@ -24,4 +24,18 @@ class Duel {
     };
   }
 
+  factory Duel.fromJSON(Map<String, dynamic> json) {
+    return Duel(
+      id: json['id'] as int?,
+      sport: json['sport'] as String,
+      championship: json['championship'] as String,
+      nameTeamA: json['nameteama'] as String,
+      scoresTeamA: json['scoresteama'] as String,
+      nameTeamB: json['nameteamb'] as String,
+      scoresTeamB: json['scoresteamb'] as String,
+      dataMatch: json['datematch'] as String,
+      timeMatch: json['timematch'] as String,
+    );
+  }
+
 }

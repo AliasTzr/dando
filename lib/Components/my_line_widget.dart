@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:projet0_strat/Components/my_text_style.dart';
 
 class MyLine extends StatelessWidget {
   final String name, value;
-  MyLine({super.key, required this.name, required this.value});
+  const MyLine({super.key, required this.name, required this.value});
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -15,7 +14,7 @@ class MyLine extends StatelessWidget {
           style: const MyStyle(fontFamily: 'quicksand', color: Colors.grey, fontWeight: FontWeight.w600, fontSize: 16),
         ),
         Container(
-          width: Get.width / 2,
+          width: MediaQuery.of(context).size.width / 2,
           alignment: Alignment.centerRight,
           child: FittedBox(
             fit: BoxFit.scaleDown,

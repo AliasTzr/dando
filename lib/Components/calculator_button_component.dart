@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:projet0_strat/Components/my_text_style.dart';
 
 
@@ -26,14 +25,14 @@ class _CalculatorButtonsState extends State<CalculatorButtons> {
     return Row(
       children: [
         Container(
-          width: Get.width * 3 / 4,
-          height: Get.height / 2.95,
-          padding: EdgeInsets.symmetric(horizontal: Get.width / 33),
+          width: MediaQuery.of(context).size.width * 3 / 4,
+          height: MediaQuery.of(context).size.height / 2.95,
+          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 33),
           child: Column(
             children: [
               SizedBox(
-                width: Get.width,
-                height: Get.height / 12,
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 12,
                 child: Row(
                   children: [
                     InkWell(
@@ -61,37 +60,37 @@ class _CalculatorButtonsState extends State<CalculatorButtons> {
               Row(
                 children: [
                   calculatorButton(textValue: "1", numberSide: true, onButtonPressed: widget.manageButton),
-                  SizedBox(width: Get.width / 25,),
+                  SizedBox(width: MediaQuery.of(context).size.width / 25,),
                   calculatorButton(textValue: "2", numberSide: true, onButtonPressed: widget.manageButton),
-                  SizedBox(width: Get.width / 25,),
+                  SizedBox(width: MediaQuery.of(context).size.width / 25,),
                   calculatorButton(textValue: "3", numberSide: true, onButtonPressed: widget.manageButton),
                 ],
               ),
-              SizedBox(height: Get.height / 50,),
+              SizedBox(height: MediaQuery.of(context).size.height / 50,),
               Row(
                 children: [
                   calculatorButton(textValue: "4", numberSide: true, onButtonPressed: widget.manageButton),
-                  SizedBox(width: Get.width / 25,),
+                  SizedBox(width: MediaQuery.of(context).size.width / 25,),
                   calculatorButton(textValue: "5", numberSide: true, onButtonPressed: widget.manageButton),
-                  SizedBox(width: Get.width / 25,),
+                  SizedBox(width: MediaQuery.of(context).size.width / 25,),
                   calculatorButton(textValue: "6", numberSide: true, onButtonPressed: widget.manageButton),
                 ],
               ),
-              SizedBox(height: Get.height / 50,),
+              SizedBox(height: MediaQuery.of(context).size.height / 50,),
               Row(
                 children: [
                   calculatorButton(textValue: "7", numberSide: true, onButtonPressed: widget.manageButton),
-                  SizedBox(width: Get.width / 25,),
+                  SizedBox(width: MediaQuery.of(context).size.width / 25,),
                   calculatorButton(textValue: "8", numberSide: true, onButtonPressed: widget.manageButton),
-                  SizedBox(width: Get.width / 25,),
+                  SizedBox(width: MediaQuery.of(context).size.width / 25,),
                   calculatorButton(textValue: "9", numberSide: true, onButtonPressed: widget.manageButton),
                 ],
               ),
-              SizedBox(height: Get.height / 50,),
+              SizedBox(height: MediaQuery.of(context).size.height / 50,),
               Row(
                 children: [
                   calculatorButton(textValue: "0", numberSide: true, onButtonPressed: widget.manageButton),
-                  SizedBox(width: Get.width / 25,),
+                  SizedBox(width: MediaQuery.of(context).size.width / 25,),
                   calculatorButton(textValue: "Match suivant", numberSide: true, onButtonPressed: widget.manageButton),
                 ],
               ),
@@ -99,20 +98,20 @@ class _CalculatorButtonsState extends State<CalculatorButtons> {
           ),
         ),
         Container(
-          width: Get.width / 4,
-          height: Get.height / 2.95,
-          padding: EdgeInsets.only(top: Get.width / 24, right: Get.width / 33),
+          width: MediaQuery.of(context).size.width / 4,
+          height: MediaQuery.of(context).size.height / 2.95,
+          padding: EdgeInsets.only(top: MediaQuery.of(context).size.width / 24, right: MediaQuery.of(context).size.width / 33),
           child: Column(
             children: [
               calculatorButton(textValue: "Supp.", numberSide: false, onButtonPressed: widget.manageButton),
-              SizedBox(height: Get.height / 52,),
+              SizedBox(height: MediaQuery.of(context).size.height / 52,),
               calculatorButton(textValue: "Vider", numberSide: false, onButtonPressed: widget.manageButton),
-              SizedBox(height: Get.height / 52,),
+              SizedBox(height: MediaQuery.of(context).size.height / 52,),
               calculatorButton(textValue: "Sauv.", numberSide: false, onButtonPressed: widget.manageButton),
-              SizedBox(height: Get.height / 52,),
+              SizedBox(height: MediaQuery.of(context).size.height / 52,),
               SizedBox(
-                width: Get.width / 4,
-                height: Get.height * (1 / 11 + 1 / 50),
+                width: MediaQuery.of(context).size.width / 4,
+                height: MediaQuery.of(context).size.height * (1 / 11 + 1 / 50),
                 child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: WidgetStateProperty.all(Colors.teal),
@@ -158,8 +157,8 @@ class _CalculatorButtonsState extends State<CalculatorButtons> {
     );
   }
   Widget calculatorButton({required String textValue, bool? numberSide, required VoidCallback onButtonPressed}) => SizedBox(
-    width: numberSide! ? textValue == "Match suivant" ? (Get.width * (1 / 2.475 + 1/25) ) : Get.width / 4.95 : Get.width / 4,
-    height: Get.height / 22,
+    width: numberSide! ? textValue == "Match suivant" ? (MediaQuery.of(context).size.width * (1 / 2.475 + 1/25) ) : MediaQuery.of(context).size.width / 4.95 : MediaQuery.of(context).size.width / 4,
+    height: MediaQuery.of(context).size.height / 22,
     child: TextButton(
         style: ButtonStyle(
             elevation: WidgetStateProperty.all(numberSide && textValue != "Match suivant"  ? 0 : 3),
@@ -176,8 +175,8 @@ class _CalculatorButtonsState extends State<CalculatorButtons> {
   Widget textFieldSelector({required String score, required String placeHolderValue, required bool caseSelected}) => AnimatedContainer(
     duration: const Duration(seconds: 1),
     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-    width: Get.width / 3,
-    height: Get.height / 17,
+    width: MediaQuery.of(context).size.width / 3,
+    height: MediaQuery.of(context).size.height / 17,
     decoration: BoxDecoration(
       color: caseSelected ? Colors.teal : Colors.black12,
       borderRadius: BorderRadius.circular(5.0),

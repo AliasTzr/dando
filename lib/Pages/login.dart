@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:projet0_strat/Components/code_checker.dart';
 import 'package:projet0_strat/Components/my_text_style.dart';
-import 'package:projet0_strat/Controllers/controller.dart';
-import 'package:projet0_strat/Controllers/login_controller.dart';
+import 'package:projet0_strat/Data/controller.dart';
 import 'package:projet0_strat/Components/presentation.dart';
+import 'package:projet0_strat/Data/login_data.dart';
 import 'package:projet0_strat/Data/route_named.dart';
 
-class LoginScreen extends GetView<LoginController> {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -37,132 +37,22 @@ class LoginScreen extends GetView<LoginController> {
           ],
         ),
         body: Container(
-          width: Get.width,
-          height: Get.height,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
           color: Colors.transparent,
           padding: const EdgeInsets.all(5),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Presentation(),
+              const CodeChecker(),
               Container(
-                height: Get.height / 10,
-                width: Get.width,
-                alignment: Alignment.center,
-                color: Colors.transparent,
-                margin: EdgeInsets.only(top: Get.height / 9),
-                child: Get.put(LoginController()).obx(
-                  (state) => const SizedBox.shrink(),
-                  onEmpty: RichText(
-                    text: TextSpan(
-                      style: const MyStyle(fontFamily: "acme", color: Controller.blackColor, fontWeight: FontWeight.w500, fontSize: 15),
-                      children: [
-                        const TextSpan(
-                          text: "Profitez-en vite !\n",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold
-                          )
-                        ),
-                        const TextSpan(
-                          text: "Le code d'accès actuellement à ",
-                        ),
-                        TextSpan(
-                          text: "${Get.put(LoginController()).price}  !\n",
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold
-                          )
-                        ),
-                        TextSpan(
-                          text: "Nombre de place limitée !",
-                          style: TextStyle(
-                            color: Colors.red.shade700,
-                            fontWeight: FontWeight.w700
-                          )
-                        )
-                      ]
-                    ),
-                  ),
-                  onLoading: const SpinKitPouringHourGlassRefined(
-                    color: Controller.tealColor,
-                  ),
-                  onError: (error) => Text(
-                    error!, 
-                    style: MyStyle(fontFamily: "acme", color: Colors.red.shade700, fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: Get.put(LoginController()).paste,
-                child: Container(
-                  width: Get.width, 
-                  height: Get.height / 13,
-                  margin: EdgeInsets.zero,
-                  padding: EdgeInsets.zero,
-                  decoration: BoxDecoration(
-                    color: Controller.tealColor,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Controller.tealColor, width: 3)
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: Get.width * 0.8,
-                        padding: const EdgeInsets.all(10),
-                        margin: EdgeInsets.zero,
-                        decoration: BoxDecoration(
-                          color: Controller.bgColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Obx(() => FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Text(
-                            Get.put(LoginController()).codeToPaste.value.contains("TZ") ? Get.put(LoginController()).codeToPaste.value.toUpperCase() : Get.put(LoginController()).codeToPaste.value,
-                            maxLines: 1,
-                            overflow: TextOverflow.fade,
-                            textAlign: TextAlign.center,
-                            style: const MyStyle(
-                              fontFamily: 'acme',
-                              color: Controller.blackColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 19.5
-                            ),
-                          ),
-                        )),
-                      ),
-                      SizedBox(
-                        width: Get.width * 0.15,
-                        child: Icon(MdiIcons.contentPaste)
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: (){
-                  Get.put(LoginController()).codeChecker(context);
-                },
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all(Controller.tealColor),
-                  shape: WidgetStateProperty.all(const StadiumBorder()),
-                ),
-                child: const Text(
-                  "Vérifier",
-                  style: MyStyle(
-                    fontFamily: 'acme',
-                    color: Colors.white,
-                    fontWeight: FontWeight.w900,
-                    fontSize: 15
-                  ),
-                ),
-              ),
-              Container(
-                width: Get.width,
-                height: Get.height / 3.5,
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 3.5,
                 padding: EdgeInsets.zero,
                 alignment: Alignment.bottomCenter,
                 child: TextButton(
-                  onPressed: Get.put(LoginController()).launchUrl, 
+                  onPressed: LoginData().launchUrl,
                   child: RichText(
                     text: const TextSpan(
                       style: MyStyle(fontFamily: "acme", color: Colors.black, fontWeight: FontWeight.w500, fontSize: 14),

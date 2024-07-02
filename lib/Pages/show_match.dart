@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:projet0_strat/Models/matches_model.dart';
-import 'package:projet0_strat/Controllers/controller.dart';
+import 'package:projet0_strat/Data/controller.dart';
 import 'package:projet0_strat/Data/db_sql_project.dart';
 import 'package:projet0_strat/Components/min_max_calculator.dart';
 import 'package:projet0_strat/Data/methodes.dart';
@@ -21,7 +21,6 @@ class MatchDetails extends StatefulWidget {
 
 class _MatchDetailsState extends State<MatchDetails> {
   DatabaseHelper databaseHelper  = DatabaseHelper();
-  final GlobalKey<_MatchDetailsState> myKey = GlobalKey();
   Future<void> _loadMatchData() async {
     Duel updatedMatch = await databaseHelper.getMatchById(widget.match.id!);
     setState(() {
@@ -72,20 +71,20 @@ class _MatchDetailsState extends State<MatchDetails> {
           ],
         ),
         body: SizedBox(
-          width: Controller.width,
-          height: Controller.height,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
           child: ListView(
             children: [
-              SizedBox(height: Controller.height / 26,),
+              SizedBox(height: MediaQuery.of(context).size.height / 26,),
               ScoreShower(scoresTeamA: scoresTeamAParseToList, scoresTeamB: scoresTeamBParseToList, nameTeamA: widget.match.nameTeamA, nameTeamB: widget.match.nameTeamB,),
-              SizedBox(height: Controller.height / 20,),
+              SizedBox(height: MediaQuery.of(context).size.height / 20,),
               MinMaxCalculator(scoresA: scoresTeamAParseToList, scoresB: scoresTeamBParseToList, nameTeamA: widget.match.nameTeamA, nameTeamB: widget.match.nameTeamB,),
-              SizedBox(height: Controller.height / 23,),
+              SizedBox(height: MediaQuery.of(context).size.height / 23,),
               widget.match.sport == "basketball" ? Column(
                 children: [
                 Container(
                   padding: const EdgeInsets.only(left: 10),
-                    width: Controller.width,
+                    width: MediaQuery.of(context).size.width,
                     child: Text(
                         "Minimum par quartant  :    ${(int.parse(minTeamA) + int.parse(minTeamB))/4}",
                       textAlign: TextAlign.left,
@@ -95,34 +94,33 @@ class _MatchDetailsState extends State<MatchDetails> {
                   const SizedBox(height: 10,),
                   Container(
                     padding: const EdgeInsets.only(left: 10),
-                    width: Controller.width,
+                    width: MediaQuery.of(context).size.width,
                     child: Text(
                       "Maximum par quartant  :    ${(int.parse(maxTeamA) + int.parse(maxTeamB))/4}",
                       textAlign: TextAlign.left,
                       style: const MyStyle(fontFamily: "acme", color: Colors.black, fontWeight: FontWeight.w500, fontSize: 14)
                     ),
                   ),
-                  SizedBox(height: Controller.height / 23,),
+                  SizedBox(height: MediaQuery.of(context).size.height / 23,),
                 ],
               ): const SizedBox.shrink(),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                height: Controller.height * 0.06,
+                height: MediaQuery.of(context).size.height * 0.06,
                 child: ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: WidgetStateProperty.all(Controller.tealColor),
                     shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
                   ),
                   onPressed: () async {
-                    final context = myKey.currentContext;
                     bool? updateSuccess = await showDialog(
-                      context: context!, 
+                      context: context, 
                       builder: (_) => PreUpdateData(match: widget.match,),
                       barrierDismissible: false,
                     );
                     if(updateSuccess != null && updateSuccess && context.mounted){
                       await _loadMatchData();
-                      snackResult("Mise à jour réussi", success: true);
+                      if(context.mounted) snackResult("Mise à jour réussi", context, success: true);
                     }
                   },
                   child: const Text(

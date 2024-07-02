@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projet0_strat/Components/my_text_style.dart';
-import 'package:projet0_strat/Controllers/controller.dart';
+import 'package:projet0_strat/Data/controller.dart';
 
 class TableHeaderComponent extends StatelessWidget {
    final String? textValue;
@@ -9,7 +9,7 @@ class TableHeaderComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: positionTop ? Controller.height / 27 : Controller.height / 18,
+      height: positionTop ? MediaQuery.of(context).size.height / 27 : MediaQuery.of(context).size.height / 18,
       color: Controller.blackColor,
       alignment: Alignment.center,
       child: FittedBox(

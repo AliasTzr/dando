@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:projet0_strat/Data/route_named.dart';
 import 'package:projet0_strat/Models/matches_model.dart';
-import 'package:projet0_strat/Controllers/controller.dart';
+import 'package:projet0_strat/Data/controller.dart';
 import 'package:projet0_strat/Data/db_sql_project.dart';
 import 'package:projet0_strat/Components/my_text_style.dart';
-import 'package:projet0_strat/Pages/show_match.dart';
 
 class Storage extends StatefulWidget {
   const Storage({super.key});
@@ -23,15 +21,6 @@ class _StorageState extends State<Storage> {
     _matchesData = await databaseHelper.getMatches();
   }
   DatabaseHelper databaseHelper = DatabaseHelper();
-  void goToMatchDetail(Duel duel) {
-    Get.to(
-      () => MatchDetails(match: duel),
-      curve: Curves.decelerate,
-      duration: const Duration(microseconds: 500),
-      transition: Transition.leftToRightWithFade,
-    )?.then((_) => setState(() {}));
-  }
-
   @override
   void dispose() {
     databaseHelper.closeDatabase();
@@ -79,7 +68,7 @@ class _StorageState extends State<Storage> {
               key: _keyList,
               itemBuilder: (context, int index, animation){
                 return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: Controller.width /20),
+                  padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width /20),
                   child: SizeTransition(
                     sizeFactor: animation,
                     key: UniqueKey(),
@@ -95,7 +84,7 @@ class _StorageState extends State<Storage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              width: Controller.width / 1.85,
+                              width: MediaQuery.of(context).size.width / 1.85,
                               alignment: Alignment.centerLeft,
                               child: FittedBox(
                                 fit: BoxFit.scaleDown,
@@ -108,7 +97,7 @@ class _StorageState extends State<Storage> {
                             ),
                             Container(
                               alignment: Alignment.centerRight,
-                              width: Controller.width / 4.9,
+                              width: MediaQuery.of(context).size.width / 4.9,
                               child: FittedBox(
                                 fit: BoxFit.scaleDown,
                                 child: Text(
