@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_router/go_router.dart';
-import 'package:projet0_strat/Components/date_component.dart';
+import 'package:intl/intl.dart';
 import 'package:projet0_strat/Components/dropdown_child.dart';
 import 'package:projet0_strat/Data/controller.dart';
 import 'package:projet0_strat/Data/db_sql_project.dart';
@@ -29,21 +29,6 @@ class _PreSaveDataState extends State<PreSaveData> {
   final TextEditingController _nameTeamA = TextEditingController();
   final TextEditingController _nameTeamB = TextEditingController();
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-  void refreshDate(DateTime? getDateTime, String getDate) {
-    setState(() {
-      _dateTime = getDateTime;
-      _date = getDate;
-    });
-  }
-
-  void refreshTime(TimeOfDay? getTimeOfDay,  String getTime, bool getCanSendNotification) {
-    setState(() {
-      _timeOfDay = getTimeOfDay;
-      _time = getTime;
-      _canSendNotification = getCanSendNotification;
-    });
-  }
 
   @override
   void initState() {
@@ -193,7 +178,92 @@ class _PreSaveDataState extends State<PreSaveData> {
                 const SizedBox(height: 5,),
                 formField(_nameTeamB, "Nom de l'équipe B", false, MediaQuery.of(context).size.width),
                 const SizedBox(height: 5,),
-                DateComponent(dateTime: _dateTime, timeOfDay: _timeOfDay, canSendNotification: _canSendNotification, date: _date, time: _time, getDateFunction: refreshDate, getTimeFunction: refreshTime,),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 4/10,
+                        height: MediaQuery.of(context).size.height * 0.06,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: WidgetStateProperty.all(Colors.teal),
+                            shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                          ),
+                          onPressed: () async {
+                            _dateTime = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime.now(),
+                              lastDate: DateTime(2100),
+                            );
+                            if (_dateTime != null) {
+                              if (DateTime.now().isBefore(_dateTime!) || DateTime.now().year == _dateTime!.year && DateTime.now().month == _dateTime!.month && DateTime.now().day == _dateTime!.day) {
+                                setState(() {
+                                  _date = DateFormat('EEE d MMM yyyy', 'fr').format(_dateTime!);
+                                });
+                              } else {
+                                setState(() {
+                                  _dateTime = null;
+                                  _date = "";
+                                });
+                                if(context.mounted) snackResult("Cette date est passée !", context, success: false, bottomPosition: false);
+                              }
+                            }
+                          },
+                          child: FittedBox(
+                            child: Text(
+                              _date.isEmpty ? "Jour" : _date,
+                              style: const MyStyle(fontFamily: Controller.poppinsFamily, color: Controller.whiteColor, fontWeight: FontWeight.w600, fontSize: 15),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.02,),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 2.2/10,
+                        height: MediaQuery.of(context).size.height * 0.06,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: WidgetStateProperty.all(Colors.teal),
+                            shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
+                          ),
+                          onPressed: () async {
+                            _canSendNotification = true;
+                            _timeOfDay = await showTimePicker(
+                              context: context,
+                              initialTime: TimeOfDay.now(),
+                            );
+                            if (_timeOfDay != null) {
+                              if (_timeOfDay!.hour >= DateTime.now().hour) {
+                                if (_timeOfDay!.hour == DateTime.now().hour && DateTime.now().minute >= _timeOfDay!.minute) {
+                                  _canSendNotification = false;
+                                  if(context.mounted) snackResult("Minute déjà écoulée !\nModifier afin de recevoir une notification.", context, success: false, bottomPosition: false);
+                                }
+                                setState(() {
+                                  _time = formatTime(_timeOfDay!);
+                                });
+                              } else {
+                                setState((){
+                                  _timeOfDay = null;
+                                  _time = "";
+                                });
+                                if(context.mounted) snackResult("Cette heure est déjà passée !", context, success: false, bottomPosition: false);
+                              }
+                            }
+                          },
+                          child: FittedBox(
+                            child: Text(
+                              _time.isEmpty ? "Heure" : _time,
+                              style: const MyStyle(fontFamily: Controller.poppinsFamily, color: Controller.whiteColor, fontWeight: FontWeight.w600, fontSize: 15),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 const SizedBox(height: 15,),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 3.8/5,
