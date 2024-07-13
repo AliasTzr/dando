@@ -5,6 +5,7 @@ import 'package:projet0_strat/Controllers/my_extra_codec.dart';
 import 'package:projet0_strat/Data/route_named.dart';
 import 'package:projet0_strat/Models/matches_model.dart';
 import 'package:projet0_strat/Pages/about_app.dart';
+import 'package:projet0_strat/Pages/data_saved.dart';
 import 'package:projet0_strat/Pages/login.dart';
 import 'package:projet0_strat/Pages/screen_manager.dart';
 import 'package:projet0_strat/Pages/show_match.dart';
@@ -34,7 +35,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.teal,
       ),
       routerConfig: GoRouter(
-        debugLogDiagnostics: true,
         extraCodec: const MyDuelCodec(),
         initialLocation: prefs!.getBool('isLogged') ?? false ? "/home" : "/",
         routes: [
@@ -56,9 +56,16 @@ class MyApp extends StatelessWidget {
             builder: (context, state) => const ScreenManager(),
             routes: [
               GoRoute(
-                name: RoutesNamed.matchDetails,
-                path: RoutesNamed.matchDetails,
-                builder: (context, state) => MatchDetails(match: state.extra as Duel),
+                name: RoutesNamed.storage,
+                path: RoutesNamed.storage,
+                builder: (context, state) => const Storage(),
+                routes: [
+                  GoRoute(
+                    name: RoutesNamed.matchDetails,
+                    path: RoutesNamed.matchDetails,
+                    builder: (context, state) => MatchDetails(match: state.extra as Duel),
+                  ),
+                ]
               )
             ]
           ),

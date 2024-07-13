@@ -26,17 +26,16 @@ class _HomeState extends State<Home> {
       shrinkWrap: true,
       physics: const ClampingScrollPhysics(),
       children: [
-        SizedBox(height: MediaQuery.of(context).size.height / 26,),
+        SizedBox(height: MediaQuery.of(context).size.height / 40,),
         ScoreShower(scoresTeamA: scoresTeamA, scoresTeamB: scoresTeamB, countMatch: countMatch),
-        SizedBox(height: MediaQuery.of(context).size.height / 20,),
+        SizedBox(height: MediaQuery.of(context).size.height / 25,),
         MinMaxCalculator(scoresA: scoresTeamA, scoresB: scoresTeamB),
-        SizedBox(height: MediaQuery.of(context).size.height / 23,),
         Row(
           children: [
             Container(
               width: MediaQuery.of(context).size.width * 3 / 4,
-              height: MediaQuery.of(context).size.height / 2.95,
-              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 33),
+              height: MediaQuery.of(context).size.height / 2.53,
+              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 33, vertical: 10),
               child: Column(
                 children: [
                   SizedBox(
@@ -95,7 +94,7 @@ class _HomeState extends State<Home> {
                       calculatorButton(textValue: "9", numberSide: true, context),
                     ],
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 50,),
+                  SizedBox(height: MediaQuery.of(context).size.height / 55,),
                   Row(
                     children: [
                       calculatorButton(textValue: "0", numberSide: true, context),
@@ -108,19 +107,19 @@ class _HomeState extends State<Home> {
             ),
             Container(
               width: MediaQuery.of(context).size.width / 4,
-              height: MediaQuery.of(context).size.height / 2.95,
-              padding: EdgeInsets.only(top: MediaQuery.of(context).size.width / 24, right: MediaQuery.of(context).size.width / 33),
+              height: MediaQuery.of(context).size.height / 2.53,
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.width / 21, right: MediaQuery.of(context).size.width / 33),
               child: Column(
                 children: [
                   calculatorButton(textValue: "Supp.", numberSide: false, context),
-                  SizedBox(height: MediaQuery.of(context).size.height / 52,),
+                  SizedBox(height: MediaQuery.of(context).size.height / 55,),
                   calculatorButton(textValue: "Vider", numberSide: false, context),
-                  SizedBox(height: MediaQuery.of(context).size.height / 52,),
+                  SizedBox(height: MediaQuery.of(context).size.height / 55,),
                   calculatorButton(textValue: "Sauv.", numberSide: false, context),
-                  SizedBox(height: MediaQuery.of(context).size.height / 52,),
+                  SizedBox(height: MediaQuery.of(context).size.height / 55,),
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 4,
-                    height: MediaQuery.of(context).size.height * (1 / 11 + 1 / 50),
+                    height: MediaQuery.of(context).size.height / 7.6,
                     child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor: WidgetStateProperty.all(Controller.tealColor),
@@ -166,7 +165,7 @@ class _HomeState extends State<Home> {
   }
   Widget calculatorButton(BuildContext context, {required String textValue, bool? numberSide}) => SizedBox(
     width: numberSide! ? textValue == "Match suivant" ? (MediaQuery.of(context).size.width * (1 / 2.475 + 1/25) ) : MediaQuery.of(context).size.width / 4.95 : MediaQuery.of(context).size.width / 4,
-    height: MediaQuery.of(context).size.height / 22,
+    height: MediaQuery.of(context).size.height / 18,
     child: ElevatedButton(
         style: ButtonStyle(
             elevation: WidgetStateProperty.all(numberSide && textValue != "Match suivant"  ? 5 : 2),
