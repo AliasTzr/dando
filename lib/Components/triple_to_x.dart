@@ -8,7 +8,7 @@ class TripleToXTips extends StatelessWidget {
     "Combinez deux matchs de cotes de 1,75 minimum pour avoir une cote de 3.",
     "Combinez trois matchs de cotes de 1,71 minimum pour avoir une cote de 5.",
     "Faites les analyses avec uniquement la stratégie basket-ball.",
-    "Jouez un seul coupon par jour (les 2 meilleures analyses de la journée).",
+    "Jouez un seul coupon par jour",
     "Jouez seulement sur les grandes compétitions.",
     "Préférence de sport : basket-ball et hockey sur glace.",
     "Avoir le budget nécessaire pour aller jusqu'au dernier niveau",
@@ -16,7 +16,8 @@ class TripleToXTips extends StatelessWidget {
     "Ne faites rien d'autre que ce qui est mentionné ici.",
   ], textWarning = <String>[
     "Perdre successivement 10 fois d'affilée (ce qui est vraiment improbable).",
-    "Danger : Vous perdrez 81 000 F si vous perdez 10 fois successivement."
+    "Danger : Avec 1000f et la cote de 3 Vous perdrez 81 000 F si vous perdez 10 fois successivement.",
+    "Danger : Avec 1000f et la cote de 5 vous perdrez 14 000 F si vous perdez 10 fois successivement."
   ];
 
   @override
