@@ -8,8 +8,7 @@ import 'package:projet0_strat/Data/methodes.dart';
 import 'package:projet0_strat/Data/route_named.dart';
 import 'package:projet0_strat/Models/matches_model.dart';
 import 'package:projet0_strat/Pages/home.dart';
-import 'package:projet0_strat/Pages/triple_to_quintiple.dart';
-import 'package:projet0_strat/Pages/triple_to_triple.dart';
+import 'package:projet0_strat/Pages/triple_to_x.dart';
 import 'package:projet0_strat/features/noti_service.dart';
 
 class ScreenManager extends StatefulWidget {
@@ -26,8 +25,7 @@ class _ScreenManagerState extends State<ScreenManager> {
   final GlobalKey<_ScreenManagerState> myKey = GlobalKey();
   final List<String> _titles = <String>[
     "Basketball",
-    "Triple to Triple",
-    "Triple to Quintuple"
+    "des montantes",
   ];
   @override
   void initState() {
@@ -71,7 +69,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                 width: MediaQuery.of(context).size.width / 1.1,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(3,
+                  children: List.generate(_titles.length,
                   (int i)=> InkWell(
                     onTap: () {
                       setState(() {
@@ -92,15 +90,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                             color: Colors.teal
                           ) : null
                         ),
-                        child: i != 0 ? Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(MdiIcons.numeric3CircleOutline),
-                            Icon(MdiIcons.rayStartArrow),
-                            i == 2 ? Icon(MdiIcons.numeric5CircleOutline): Icon(MdiIcons.numeric3CircleOutline)
-                          ],
-                        ) : Icon(MdiIcons.fromString("basketballHoopOutline"), size: 30,),
+                        child: Icon(MdiIcons.fromString(i ==0 ? "basketballHoopOutline" : "finance"), size: 30,),
                       ),
                   ),
                   )
@@ -116,7 +106,7 @@ class _ScreenManagerState extends State<ScreenManager> {
           child: PageView(
             physics: const NeverScrollableScrollPhysics(),
             controller: _pageController,
-            children: const [TripleToTriple(), Home(), TripleToQuintiple()],
+            children: const [Home(), TripleToX()],
           ),
         ),
       ),

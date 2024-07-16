@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:math_expressions/math_expressions.dart';
 import 'package:projet0_strat/Data/controller.dart';
 import 'package:projet0_strat/Components/min_max_calculator.dart';
 import 'package:projet0_strat/Data/methodes.dart';
@@ -265,15 +264,4 @@ class _HomeState extends State<Home> {
       ),
     ),
   );
-  String calculate(String score1, String score2){
-    try{
-      String result;
-      var exp = Parser().parse("$score1 + $score2");
-      var evaluation = exp.evaluate(EvaluationType.REAL, ContextModel());
-      result = evaluation.toString().replaceAll(".0", "");
-      return result;
-    }catch(e){
-      return "";
-    }
-  }
 }
