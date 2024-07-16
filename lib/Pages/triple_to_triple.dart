@@ -41,9 +41,7 @@ class _TripleToTripleState extends State<TripleToTriple> {
               children: [
                 IconButton(
                     iconSize: 30,
-                    onPressed: () {
-                      print("delete all data from the database");
-                    },
+                    onPressed: dataReset,
                     icon: Icon(
                       MdiIcons.databaseRemove,
                     )),
@@ -265,6 +263,17 @@ void initialization() async {
     _level = await _prefsData.getData("level");
     _benefit = await _prefsData.getData("benef");
     setState(() {});
+  }
+
+  void dataReset(){
+    _prefsData.setBoolData("start3", false);
+    _prefsData.setData("stake", "0");
+    _prefsData.setData("startingstake", "0");
+    _prefsData.setData("win", "0");
+    _prefsData.setData("lost", "0");
+    _prefsData.setData("level", "0");
+    _prefsData.setData("benef", "0");
+    initialization();
   }
   void restart(BuildContext context, {String? message}) async {
     bool? success = await showDialog(
