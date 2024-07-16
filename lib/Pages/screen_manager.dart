@@ -116,7 +116,7 @@ class _ScreenManagerState extends State<ScreenManager> {
           child: PageView(
             physics: const NeverScrollableScrollPhysics(),
             controller: _pageController,
-            children: const [Home(), TripleToTriple(), TripleToQuintiple()],
+            children: const [TripleToTriple(), Home(), TripleToQuintiple()],
           ),
         ),
       ),

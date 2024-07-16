@@ -17,6 +17,18 @@ String calculate(String score1, String score2){
   }
 }
 
+String calculateAmount(String value, String odds){
+  try{
+    String result;
+    var exp = Parser().parse("$value * $odds");
+    var evaluation = exp.evaluate(EvaluationType.REAL, ContextModel());
+    result = evaluation.toString().replaceAll(".0", "");
+    return result;
+  }catch(e){
+    return "";
+  }
+}
+
 String insertNewScore(String scoresList, String newScore){
   List<String> myArray = scoresList.split(" ");
   for (int i = myArray.length - 1; i > 0; i--) {
@@ -112,3 +124,26 @@ bool isNumeric(String str) {
   final numericRegex = RegExp(r'^-?[0-9]+$');
   return numericRegex.hasMatch(str);
 }
+
+String addSpaces(String number) {
+    if (number.isEmpty || !isNumeric(number)) {
+      return number;
+    }
+    number = number.replaceAll(' ', '');
+    int nombreEntier = int.parse(number);
+    if (nombreEntier.isNaN) {
+      return number;
+    }
+    String formatedNumber = nombreEntier.toString();
+    String result = '';
+    int longueur = formatedNumber.length;
+
+    for (int i = 0; i < longueur; i++) {
+      result += formatedNumber[i];
+      if ((longueur - i - 1) % 3 == 0 && i != longueur - 1) {
+        result += ' ';
+      }
+    }
+    return result;
+  }
+

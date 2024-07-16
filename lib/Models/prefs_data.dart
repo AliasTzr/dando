@@ -13,7 +13,7 @@ class PrefsData {
 
   Future<String> getData(String key) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String value = prefs.getString(key) ?? "null";
+    final String value = prefs.getString(key) ?? "0";
     return value;
   }
   Future<bool> getBoolData(String key) async {
