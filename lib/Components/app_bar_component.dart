@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:projet0_strat/Components/my_icon_button.dart';
+import 'package:projet0_strat/Data/controller.dart';
 import 'my_text_style.dart';
 
 // ignore: must_be_immutable
@@ -10,9 +11,9 @@ class MyAppBar extends AppBar implements PreferredSizeWidget{
     title: Text(
       title,
       style: const MyStyle(
-          fontFamily: 'lobster',
+          fontFamily: Controller.oswaldFamily,
           color: Colors.black,
-          fontWeight: FontWeight.w300,
+          fontWeight: FontWeight.w700,
           fontSize: 17,
       ),
     ),

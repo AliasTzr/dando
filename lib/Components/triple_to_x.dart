@@ -6,6 +6,7 @@ class TripleToXTips extends StatelessWidget {
   TripleToXTips({super.key});
   final List<String> textsAvises = <String>[
     "Combinez deux matchs de cotes de 1,75 minimum pour avoir une cote de 3.",
+    "Combinez trois matchs de cotes de 1,71 minimum pour avoir une cote de 5.",
     "Faites les analyses avec uniquement la stratégie basket-ball.",
     "Jouez un seul coupon par jour (les 2 meilleures analyses de la journée).",
     "Jouez seulement sur les grandes compétitions.",
@@ -20,35 +21,38 @@ class TripleToXTips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
-      text: TextSpan(
-        style: const MyStyle(fontFamily:  Controller.poppinsFamily, color: Colors.black, fontWeight: FontWeight.w600, fontSize: 13),
-        children: [
-          tilte("Conseils"),
-          TextSpan(
-                children: List.generate(textsAvises.length,
-            (int index) => TextSpan(
-              children: [
-                star(),
-                text(textsAvises[index]
-                )
-              ]
-            )
-            )
-          ),
-          tilte("Perte possible:", color: Controller.redColor),
-          TextSpan(
-            children: List.generate(textWarning.length, 
+    return SingleChildScrollView(
+      physics: const ClampingScrollPhysics(),
+      child: RichText(
+        text: TextSpan(
+          style: const MyStyle(fontFamily:  Controller.poppinsFamily, color: Colors.black, fontWeight: FontWeight.w600, fontSize: 13),
+          children: [
+            tilte("Conseils"),
+            TextSpan(
+                  children: List.generate(textsAvises.length,
               (int index) => TextSpan(
                 children: [
-                  star(red: false),
-                  text(textWarning[index])
+                  star(),
+                  text(textsAvises[index]
+                  )
                 ]
               )
+              )
+            ),
+            tilte("Perte possible:", color: Controller.redColor),
+            TextSpan(
+              children: List.generate(textWarning.length, 
+                (int index) => TextSpan(
+                  children: [
+                    star(red: false),
+                    text(textWarning[index])
+                  ]
+                )
+              )
             )
-          )
-        ]
-      )
+          ]
+        )
+      ),
     );
   }
 

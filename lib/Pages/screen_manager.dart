@@ -24,7 +24,7 @@ class _ScreenManagerState extends State<ScreenManager> {
   DatabaseHelper databaseHelper = DatabaseHelper();
   final GlobalKey<_ScreenManagerState> myKey = GlobalKey();
   final List<String> _titles = <String>[
-    "Basketball",
+    "Basket",
     "des montantes",
   ];
   @override
@@ -52,14 +52,14 @@ class _ScreenManagerState extends State<ScreenManager> {
           ),
           centerTitle: true,
           actions: [
-            IconButton(
+            _currentPage == 0 ? IconButton(
               onPressed: (){
                 context.goNamed(RoutesNamed.storage);
               },
               iconSize: 30,
               color: Colors.black,
               icon: Icon(MdiIcons.database)
-            )
+            ) : const SizedBox.shrink()
           ],
           bottom: PreferredSize(
             preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 20),
