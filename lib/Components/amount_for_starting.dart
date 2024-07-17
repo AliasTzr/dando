@@ -18,8 +18,18 @@ class AmountForStarting extends StatefulWidget {
 
 class _AmountForStartingState extends State<AmountForStarting> {
   final PrefsData _prefsData = PrefsData();
+  final FocusNode _focusNode = FocusNode();
   String _odds = "3";
   int _currentOdds = 1;
+  @override
+  void initState() {
+    if (widget.textEditingController != null) {
+      widget.textEditingController!.clear();
+      _focusNode.requestFocus();
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -44,6 +54,7 @@ class _AmountForStartingState extends State<AmountForStarting> {
                   maxLength: 5,
                   maxLines: 1,
                   minLines: 1,
+                  focusNode: _focusNode,
                   keyboardType: TextInputType.number,
                   style: const MyStyle(fontFamily: Controller.acmeFamily, color: Colors.black, fontWeight: FontWeight.w400, fontSize: 20),
                   decoration: const InputDecoration(

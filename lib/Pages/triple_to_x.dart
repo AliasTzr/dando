@@ -29,6 +29,11 @@ class _TripleToXState extends State<TripleToX> {
     initialization();
   }
   @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
     return Material(
       child: ListView(
@@ -146,7 +151,7 @@ class _TripleToXState extends State<TripleToX> {
                           builder: (BuildContext context) => AmountForStarting(
                                 textEditingController: _textEditingController,
                                 isForAmount: true,
-                                message: _odds,
+                                message: null,
                               ));
                       if (isDone != null && isDone != "null") {
                         String value = _textEditingController.text.trim().replaceAll(" ", "").replaceAll("-", '');
@@ -156,9 +161,10 @@ class _TripleToXState extends State<TripleToX> {
                             _start = true;
                             _level = "1";
                             _odds = isDone;
+                            _startingStake = value;
                           });
                           _prefsData.setData("stake", _stake);
-                          _prefsData.setData("startingstake", _stake);
+                          _prefsData.setData("startingstake", _startingStake);
                           _prefsData.setBoolData("start3", _start);
                           _prefsData.setData("level", _level);
                           _prefsData.setData("odds", _odds);
@@ -202,34 +208,40 @@ class _TripleToXState extends State<TripleToX> {
                                 if (!int.parse(_betWin).isNegative && _betWin != "0") {_betWin = (int.parse(_betWin) - int.parse(_stake)).toString();} else {_betWin = "0";}
                                 _level = calculate(_level, "1");
                                 _betLost = calculate(_betLost, _stake);
-                                if (int.parse(_level) > 3 && _odds == "3") {
+                                if (_odds == "3") {
                                   switch (_level) {
                                     case "4" || "5":
                                       _stake =  calculateAmount(_startingStake, "3");
                                       break;
                                     case "6" || "7":
-                                    if(_level == "6") restart(context, message: "Vous avez perdu 5 fois !");
-                                    _stake = calculateAmount(_startingStake, "9");
+                                      if(_level == "6") restart(context, message: "Vous avez perdu 5 fois !");
+                                       _stake =  calculateAmount(_startingStake, "9");
                                       break;
                                     case "8" || "9":
-                                      _stake = calculateAmount(_startingStake, "27");
+                                      _stake =  calculateAmount(_startingStake, "27");
+                                      break;
+                                    case "10":
+                                      _stake =  calculateAmount(_startingStake, "81");
                                       break;
                                     default:
-                                      _stake = calculateAmount(_startingStake, "81");
                                       break;
                                   }
                                 }
-                                if (int.parse(_level) > 5 && _odds == "5") {
+                                if (_odds == "5") {
                                   switch (_level) {
                                     case "6" || "7" || "8":
-                                       _stake =  calculateAmount(_startingStake, "3");
+                                      _stake = calculateAmount(_startingStake, "3");
                                       break;
                                     case "9" || "10":
-                                      if(_level == "9") restart(context, message: "Vous avez perdu 8 fois !");
-                                      _stake = calculateAmount(_startingStake, "9");
                                       break;
                                     default:
-                                      break;
+                                  }
+                                  if (_level == "6" || _level == "7" || _level == "8") {
+                                    _stake =  (int.parse(_startingStake) * 3).toString();
+                                  }
+                                  if (_level == "9" || _level == "10") {
+                                    if(_level == "9") restart(context, message: "Vous avez perdu 8 fois !");
+                                    _stake =  (int.parse(_startingStake) * 9).toString();
                                   }
                                 }
                                 _prefsData.setData("lost", _betLost);

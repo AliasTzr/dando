@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class LoginData {
-  static const String price = "12 990f cfa";
+  static const String price = "13 000f cfa";
   final _phoneNumber = "2250173871065";
   static final List<String> titles = [
     "Grosse occasion ",

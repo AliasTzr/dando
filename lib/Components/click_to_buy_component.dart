@@ -13,7 +13,7 @@ class ClickToBuy extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.all(10),
           child: Text(
-            "${LoginData.price} au lieu de 99 000f fcfa pour accéder à toutes les fonctionnalités de l'application.",
+            "${LoginData.price} au lieu de 150 000f fcfa pour accéder à toutes les fonctionnalités de l'application.",
             textAlign: TextAlign.center,
             style: MyStyle(fontFamily: Controller.acmeFamily, color: Colors.black, fontWeight: FontWeight.w600, fontSize: 15),
           ),
